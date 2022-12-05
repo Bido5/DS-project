@@ -1,103 +1,53 @@
 #include <iostream>
-#include <algorithm>
-#include <stack>
+#include <vector>
+#include <fstream>
 
 using namespace std;
 
 
-string minify(string test){
-    test.erase(remove(test.begin(), test.end(), ' '), test.end());
-    test.erase(remove(test.begin(), test.end(), '\n'), test.end());
-    return test;
-}
-
-
 int main()
 {
-    string xml="<users>\
-    <user>\
-        <id>1</id>\
-        <name>Ahmed Ali</name>\
-        <posts>\
-            <post>\
-                <body>\
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\
-                </body>\
-                <topics>\
-                    <topic>\
-                        economy\
-                    </topic>\
-                    <topic>\
-                        finance\
-                    </topic>\
-                </topics>\
-            </post>\
-            <post>\
-                <body>\
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\
-                </body>\
-                <topics>\
-                    <topic>\
-                        solar_energy\
-                    </topic>\
-                </topics>\
-            </post>\
-        </posts>\
-        <followers>\
-            <follower>\
-                <id>2</id>\
-            </follower>\
-            <follower>\
-                <id>3</id>\
-            </follower>\
-        </followers>\
-    </user>\
-    <user>\
-        <id>2</id>\
-        <name>Yasser Ahmed</name>\
-        <posts>\
-            <post>\
-                <body>\
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\
-                </body>\
-                <topics>\
-                    <topic>\
-                        education\
-                    </topic>\
-                </topics>\
-            </post>\
-        </posts>\
-        <followers>\
-            <follower>\
-                <id>1</id>\
-            </follower>\
-        </followers>\
-    </user>\
-    <user>\
-        <id>3</id>\
-        <name>Mohamed Sherif</name>\
-        <posts>\
-            <post>\
-                <body>\
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\
-                </body>\
-                <topics>\
-                    <topic>\
-                        sports\
-                    </topic>\
-                </topics>\
-            </post>\
-        </posts>\
-        <followers>\
-            <follower>\
-                <id>1</id>\
-            </follower>\
-        </followers>\
-    </user>\
-</users>";
+    fstream xfile;
+    string line;
+    vector <string> elements;
+    int space=0;
+    bool text = false;
+    int lsize;
 
+    xfile.open("resources/sample.txt");
+    while(!xfile.eof()){
+        getline(xfile, line);
+        lsize = line.size();
+        space=0;
+        text = false;
+        for(int i=0; i<lsize-2; i+=4){
+            if(line[i]==' ')
+                    space+=4;
+            else
+                break;
+        }
 
-    string minXML=minify(xml);
-    cout<<minXML;
-    return 0;
+        if(!(line[space+1] == '/')){
+            for(int i=space; i<lsize-3; i++){
+                if(line[i]=='<')
+                    i+=2;
+                else if(line[i]=='>'){
+                    elements.push_back(line.substr(space,i-space+1));
+                    elements.push_back(line.substr(i+1,lsize-2*i+space-3));
+                    elements.push_back(line.substr((lsize-2-i+space),i-space+2));
+                    text = true;
+                    break;
+                }
+        }
+        if(!text){
+            elements.push_back(line.substr(space,lsize-space));
+        }
+        }
+    }
+    xfile.close();
+    elements.shrink_to_fit();
+    for(int i=0; i<elements.size();i++)
+        cout<<elements[i]<<endl;
 }
+
+
