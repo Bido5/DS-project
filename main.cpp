@@ -1,16 +1,4 @@
-#include <iostream>
-#include <algorithm>
-#include <stack>
-
-using namespace std;
-
-
-string minify(string test){
-    test.erase(remove(test.begin(), test.end(), ' '), test.end());
-    test.erase(remove(test.begin(), test.end(), '\n'), test.end());
-    return test;
-}
-
+#include "operations.h"
 
 int main()
 {
@@ -96,7 +84,7 @@ int main()
     </user>\
 </users>";
 
-
+    
     string minXML=minify(xml);
     cout<<minXML;
     return 0;
