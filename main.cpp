@@ -1,8 +1,9 @@
 #include "operations.h"
+#include "XmlToTree.h"
 
 int main()
 {
-    string xml="<users>\
+    string xml = "<users>\
     <user>\
         <id>1</id>\
         <name>Ahmed Ali</name>\
@@ -84,8 +85,15 @@ int main()
     </user>\
 </users>";
 
-    
-    string minXML=minify(xml);
-    cout<<minXML;
+    string minXML = minify(xml);
+    cout << minXML;
+
+    // test XmlToTree
+    vector<string> elementsTry = {"<Users>", "<user>", "<id>", "1", "</id>", "<name>", "Ahmed Ali", "</name>", "</user>", "<user>", "<id>", "2", "</id>"};
+    // string elements[] = {"<Users>", "<user>", "<id>", "1", "</id>", "<name>", "Ahmed Ali", "</name>"};
+    Node *trial = new Node(elementsTry[0]);
+    // Node *trial =new Node("5");
+    trial->buildTree(elementsTry);
+    cout << "finish";
     return 0;
 }
