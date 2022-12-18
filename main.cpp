@@ -95,5 +95,54 @@ int main()
     // Node *trial =new Node("5");
     trial->buildTree(elementsTry);
     cout << "finish";
+
+    string fileLine;
+    string allXml;
+
+    // Read from the text file
+    ifstream MyReadFile("sample.txt");
+
+    // Use a while loop together with the getline() function to read the file line by line
+    while (getline(MyReadFile, fileLine))
+    {
+        // count++;
+        allXml += fileLine;
+        // fileLine = Pretify(fileLine);
+        // Output the text from the file
+        //................  xmlToTree(fileLine);
+    }
+
+    // Close the file
+    MyReadFile.close();
+    //  cout <<allXml;
+
+    cout << allXml.size() << endl
+         << ".........." << endl;
+
+    HashMap *hash = new HashMap();
+    vector<int> compressed;
+    compressed = compress(allXml, hash);
+    string decompressed;
+    decompressed = decompress(compressed, hash);
+    cout << decompressed;
+    if (allXml == decompressed)
+    {
+        cout << endl
+             << "worked";
+    }
+    else
+    {
+        cout << endl
+             << " failed";
+    }
+    ofstream myWriteFile;
+    myWriteFile.open("compressed.txt");
+    for (int i = 0; i < compressed.size(); i++)
+    {
+        myWriteFile << compressed[i];
+        // myWriteFile<<" ";
+    }
+    myWriteFile.close();
+
     return 0;
 }
