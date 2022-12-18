@@ -1,6 +1,7 @@
 #include "operations.h"
 
-string minify(string test) {
+string minify(string test)
+{
     test.erase(remove(test.begin(), test.end(), '  '), test.end());
     test.erase(remove(test.begin(), test.end(), '\n'), test.end());
     return test;
@@ -13,31 +14,42 @@ string minify(string test) {
  *
  *
  * */
-vector<int> compress(string text, HashMaphash){
+vector<int> compress(string text, HashMaphash)
+{
     vector<int> result = {};
     text = minify(text);
-    for(int i=0; i< text.length()-1; i+=2){
+    for (int i = 0; i < text.length() - 1; i += 2)
+    {
         string str = "";
         str += text[i];
-        str += text[i+1];
+        str += text[i + 1];
         hash->insert(str);
         result.push_back(hash->hashString(str));
     }
     hash->printHash();
-    for (int i = 0; i < result.size(); ++i) {
-        if(result[i] != 0){
-            cout<< i << ": "<<result[i]<< " " << endl;
+    for (int i = 0; i < result.size(); ++i)
+    {
+        if (result[i] != 0)
+        {
+            cout << i << ": " << result[i] << " " << endl;
         }
     }
 
-    cout << "compression size: " <<result.size()<<endl;
+    cout << "compression size: " << result.size() << endl;
     return result;
 }
-    //hash->printHash();
-    //for (int i = 0; i < result.size(); ++i) {
-    //  if(result[i] != 0){
-    //    cout<< i << ": "<<result[i]<< " " << endl;
-    //}
-    //}
-
-
+// hash->printHash();
+// for (int i = 0; i < result.size(); ++i) {
+//   if(result[i] != 0){
+//     cout<< i << ": "<<result[i]<< " " << endl;
+// }
+// }
+string decompress(vector<int> compressed, HashMap *hash)
+{
+    string xml = "";
+    for (int i = 0; i < compressed.size(); i++)
+    {
+        xml += hash->searchByKey(compressed[i]);
+    }
+    return xml;
+}

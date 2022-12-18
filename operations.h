@@ -12,4 +12,5 @@
 using namespace std;
 string minify(string test);
 vector<int> compress(string text, HashMaphash);
-#endif //DS_PROJECT_OPERATIONS_H
+string decompress(vector<int> compressed, HashMap *hash);
+#endif // DS_PROJECT_OPERATIONS_H
