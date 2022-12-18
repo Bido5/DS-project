@@ -13,23 +13,31 @@ string minify(string test) {
  *
  *
  * */
-void compress(string text){
-    auto hash = new HashMap;
+vector<int> compress(string text, HashMaphash){
     vector<int> result = {};
     text = minify(text);
-    for(pair<int,int> i (0,0); i.first< text.length()-1; i.first+=2){
+    for(int i=0; i< text.length()-1; i+=2){
         string str = "";
-        str += text[i.first];
-        str += text[i.first+1];
+        str += text[i];
+        str += text[i+1];
         hash->insert(str);
         result.push_back(hash->hashString(str));
-        i.second++;
     }
+    hash->printHash();
+    for (int i = 0; i < result.size(); ++i) {
+        if(result[i] != 0){
+            cout<< i << ": "<<result[i]<< " " << endl;
+        }
+    }
+
+    cout << "compression size: " <<result.size()<<endl;
+    return result;
+}
     //hash->printHash();
     //for (int i = 0; i < result.size(); ++i) {
     //  if(result[i] != 0){
     //    cout<< i << ": "<<result[i]<< " " << endl;
     //}
     //}
-    cout << "compression size: " <<result.size()<<endl;
-}
+
+

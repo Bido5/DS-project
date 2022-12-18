@@ -11,5 +11,5 @@
 #include "vector"
 using namespace std;
 string minify(string test);
-void compress(string text);
+vector<int> compress(string text, HashMaphash);
 #endif //DS_PROJECT_OPERATIONS_H
