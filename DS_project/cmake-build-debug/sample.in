@@ -1,0 +1,19 @@
+<users>
+ <user><id> 1 </id> <name> heba ayman</name><posts><post><body>ff </body><topics> <topic>
+                        economy
+                    </topic>
+                    <topic>
+                          economy
+                    </topic>
+                </topics>
+            </post>
+            </posts>
+            <followers>
+        <follower>
+        <id>
+        2
+        </id>
+            </follower>
+        </followers>
+    </user>
+</users>
