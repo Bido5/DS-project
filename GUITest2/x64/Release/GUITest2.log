@@ -1,0 +1,5 @@
+﻿  MyForm.cpp
+D:\college\Elec_03\Term1\DataStructures\project\GUI\GUITest2\GUITest2\Adapter.h(28,2): warning C4091: 'static ': ignored on left of 'Adapter' when no variable is declared
+D:\college\Elec_03\Term1\DataStructures\project\GUI\GUITest2\GUITest2\Adapter.h(21,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Adapter.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  GUITest2.vcxproj -> D:\college\Elec_03\Term1\DataStructures\project\GUI\GUITest2\x64\Release\GUITest2.exe
