@@ -112,7 +112,13 @@ namespace GUITest2 {
 
 	private: System::Windows::Forms::ToolStripMenuItem^ saveNewToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ saveToThisFileToolStripMenuItem;
-	private: System::Windows::Forms::ProgressBar^ progressBar1;
+	private: System::Windows::Forms::Button^ compress_btn;
+
+	private: System::Windows::Forms::FlowLayoutPanel^ flowLayoutPanel1;
+	private: System::Windows::Forms::Button^ minify_btn;
+	private: System::Windows::Forms::Button^ btn_decompress;
+
+
 
 
 
@@ -151,6 +157,19 @@ namespace GUITest2 {
 			   this->c_Status = (gcnew System::Windows::Forms::Label());
 			   this->Status_lb = (gcnew System::Windows::Forms::Label());
 			   this->pn_cn = (gcnew System::Windows::Forms::Panel());
+			   this->pn_compression = (gcnew System::Windows::Forms::Panel());
+			   this->flowLayoutPanel1 = (gcnew System::Windows::Forms::FlowLayoutPanel());
+			   this->minify_btn = (gcnew System::Windows::Forms::Button());
+			   this->compress_btn = (gcnew System::Windows::Forms::Button());
+			   this->btn_decompress = (gcnew System::Windows::Forms::Button());
+			   this->pn_Home = (gcnew System::Windows::Forms::Panel());
+			   this->flowLayoutPanel2 = (gcnew System::Windows::Forms::FlowLayoutPanel());
+			   this->Welcome_lbl = (gcnew System::Windows::Forms::Label());
+			   this->cn_FileMenu = (gcnew System::Windows::Forms::SplitContainer());
+			   this->btn_selectFile = (gcnew System::Windows::Forms::Button());
+			   this->btn_newFile = (gcnew System::Windows::Forms::Button());
+			   this->btn_Browse = (gcnew System::Windows::Forms::Button());
+			   this->lbl_FileName = (gcnew System::Windows::Forms::Label());
 			   this->pn_Formatting = (gcnew System::Windows::Forms::Panel());
 			   this->panel2 = (gcnew System::Windows::Forms::Panel());
 			   this->Format_toolStrip = (gcnew System::Windows::Forms::ToolStrip());
@@ -163,18 +182,8 @@ namespace GUITest2 {
 			   this->Corrector = (gcnew System::Windows::Forms::ToolStripButton());
 			   this->btn_restore = (gcnew System::Windows::Forms::ToolStripButton());
 			   this->tb_XML_viewer = (gcnew System::Windows::Forms::TextBox());
-			   this->pn_Home = (gcnew System::Windows::Forms::Panel());
-			   this->flowLayoutPanel2 = (gcnew System::Windows::Forms::FlowLayoutPanel());
-			   this->Welcome_lbl = (gcnew System::Windows::Forms::Label());
-			   this->cn_FileMenu = (gcnew System::Windows::Forms::SplitContainer());
-			   this->btn_selectFile = (gcnew System::Windows::Forms::Button());
-			   this->btn_newFile = (gcnew System::Windows::Forms::Button());
-			   this->btn_Browse = (gcnew System::Windows::Forms::Button());
-			   this->lbl_FileName = (gcnew System::Windows::Forms::Label());
 			   this->pn_Insights = (gcnew System::Windows::Forms::Panel());
-			   this->pn_compression = (gcnew System::Windows::Forms::Panel());
 			   this->pn_consistency = (gcnew System::Windows::Forms::Panel());
-			   this->progressBar1 = (gcnew System::Windows::Forms::ProgressBar());
 			   this->pn_tb->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->logo))->BeginInit();
 			   this->pn_mb->SuspendLayout();
@@ -182,16 +191,17 @@ namespace GUITest2 {
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->big_Logo))->BeginInit();
 			   this->pn_sb->SuspendLayout();
 			   this->pn_cn->SuspendLayout();
-			   this->pn_Formatting->SuspendLayout();
-			   this->panel2->SuspendLayout();
-			   this->Format_toolStrip->SuspendLayout();
+			   this->pn_compression->SuspendLayout();
+			   this->flowLayoutPanel1->SuspendLayout();
 			   this->pn_Home->SuspendLayout();
 			   this->flowLayoutPanel2->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->cn_FileMenu))->BeginInit();
 			   this->cn_FileMenu->Panel1->SuspendLayout();
 			   this->cn_FileMenu->Panel2->SuspendLayout();
 			   this->cn_FileMenu->SuspendLayout();
-			   this->pn_compression->SuspendLayout();
+			   this->pn_Formatting->SuspendLayout();
+			   this->panel2->SuspendLayout();
+			   this->Format_toolStrip->SuspendLayout();
 			   this->SuspendLayout();
 			   // 
 			   // pn_tb
@@ -438,9 +448,9 @@ namespace GUITest2 {
 			   this->pn_sb->Controls->Add(this->c_Status);
 			   this->pn_sb->Controls->Add(this->Status_lb);
 			   this->pn_sb->Dock = System::Windows::Forms::DockStyle::Bottom;
-			   this->pn_sb->Location = System::Drawing::Point(200, 674);
+			   this->pn_sb->Location = System::Drawing::Point(200, 647);
 			   this->pn_sb->Name = L"pn_sb";
-			   this->pn_sb->Size = System::Drawing::Size(1300, 75);
+			   this->pn_sb->Size = System::Drawing::Size(1300, 102);
 			   this->pn_sb->TabIndex = 4;
 			   // 
 			   // button1
@@ -499,8 +509,213 @@ namespace GUITest2 {
 			   this->pn_cn->Dock = System::Windows::Forms::DockStyle::Fill;
 			   this->pn_cn->Location = System::Drawing::Point(200, 61);
 			   this->pn_cn->Name = L"pn_cn";
-			   this->pn_cn->Size = System::Drawing::Size(1300, 613);
+			   this->pn_cn->Size = System::Drawing::Size(1300, 586);
 			   this->pn_cn->TabIndex = 5;
+			   // 
+			   // pn_compression
+			   // 
+			   this->pn_compression->Controls->Add(this->flowLayoutPanel1);
+			   this->pn_compression->Dock = System::Windows::Forms::DockStyle::Fill;
+			   this->pn_compression->Location = System::Drawing::Point(0, 0);
+			   this->pn_compression->Name = L"pn_compression";
+			   this->pn_compression->Size = System::Drawing::Size(1300, 586);
+			   this->pn_compression->TabIndex = 3;
+			   // 
+			   // flowLayoutPanel1
+			   // 
+			   this->flowLayoutPanel1->Controls->Add(this->minify_btn);
+			   this->flowLayoutPanel1->Controls->Add(this->compress_btn);
+			   this->flowLayoutPanel1->Controls->Add(this->btn_decompress);
+			   this->flowLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Left;
+			   this->flowLayoutPanel1->Location = System::Drawing::Point(0, 0);
+			   this->flowLayoutPanel1->Name = L"flowLayoutPanel1";
+			   this->flowLayoutPanel1->Size = System::Drawing::Size(130, 586);
+			   this->flowLayoutPanel1->TabIndex = 1;
+			   // 
+			   // minify_btn
+			   // 
+			   this->minify_btn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(41)), static_cast<System::Int32>(static_cast<System::Byte>(44)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(53)));
+			   this->minify_btn->FlatAppearance->BorderSize = 0;
+			   this->minify_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->minify_btn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold));
+			   this->minify_btn->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
+			   this->minify_btn->Location = System::Drawing::Point(3, 3);
+			   this->minify_btn->Name = L"minify_btn";
+			   this->minify_btn->Size = System::Drawing::Size(122, 49);
+			   this->minify_btn->TabIndex = 1;
+			   this->minify_btn->Text = L"minify";
+			   this->minify_btn->UseVisualStyleBackColor = false;
+			   this->minify_btn->Click += gcnew System::EventHandler(this, &MyForm::minify_btn_Click);
+			   // 
+			   // compress_btn
+			   // 
+			   this->compress_btn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(41)), static_cast<System::Int32>(static_cast<System::Byte>(44)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(53)));
+			   this->compress_btn->FlatAppearance->BorderSize = 0;
+			   this->compress_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->compress_btn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold));
+			   this->compress_btn->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
+			   this->compress_btn->Location = System::Drawing::Point(3, 58);
+			   this->compress_btn->Name = L"compress_btn";
+			   this->compress_btn->Size = System::Drawing::Size(122, 49);
+			   this->compress_btn->TabIndex = 0;
+			   this->compress_btn->Text = L"compress";
+			   this->compress_btn->UseVisualStyleBackColor = false;
+			   // 
+			   // btn_decompress
+			   // 
+			   this->btn_decompress->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(41)), static_cast<System::Int32>(static_cast<System::Byte>(44)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(53)));
+			   this->btn_decompress->FlatAppearance->BorderSize = 0;
+			   this->btn_decompress->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->btn_decompress->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold));
+			   this->btn_decompress->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
+			   this->btn_decompress->Location = System::Drawing::Point(3, 113);
+			   this->btn_decompress->Name = L"btn_decompress";
+			   this->btn_decompress->Size = System::Drawing::Size(122, 49);
+			   this->btn_decompress->TabIndex = 2;
+			   this->btn_decompress->Text = L"decompress";
+			   this->btn_decompress->UseVisualStyleBackColor = false;
+			   // 
+			   // pn_Home
+			   // 
+			   this->pn_Home->Controls->Add(this->flowLayoutPanel2);
+			   this->pn_Home->Dock = System::Windows::Forms::DockStyle::Fill;
+			   this->pn_Home->Location = System::Drawing::Point(0, 0);
+			   this->pn_Home->Name = L"pn_Home";
+			   this->pn_Home->Size = System::Drawing::Size(1300, 586);
+			   this->pn_Home->TabIndex = 0;
+			   // 
+			   // flowLayoutPanel2
+			   // 
+			   this->flowLayoutPanel2->Controls->Add(this->Welcome_lbl);
+			   this->flowLayoutPanel2->Controls->Add(this->cn_FileMenu);
+			   this->flowLayoutPanel2->Controls->Add(this->lbl_FileName);
+			   this->flowLayoutPanel2->Dock = System::Windows::Forms::DockStyle::Fill;
+			   this->flowLayoutPanel2->FlowDirection = System::Windows::Forms::FlowDirection::TopDown;
+			   this->flowLayoutPanel2->Location = System::Drawing::Point(0, 0);
+			   this->flowLayoutPanel2->Name = L"flowLayoutPanel2";
+			   this->flowLayoutPanel2->Size = System::Drawing::Size(1300, 586);
+			   this->flowLayoutPanel2->TabIndex = 0;
+			   // 
+			   // Welcome_lbl
+			   // 
+			   this->Welcome_lbl->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			   this->Welcome_lbl->AutoSize = true;
+			   this->Welcome_lbl->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 72, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->Welcome_lbl->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
+			   this->Welcome_lbl->Location = System::Drawing::Point(350, 100);
+			   this->Welcome_lbl->Margin = System::Windows::Forms::Padding(350, 100, 350, 100);
+			   this->Welcome_lbl->Name = L"Welcome_lbl";
+			   this->Welcome_lbl->Size = System::Drawing::Size(451, 108);
+			   this->Welcome_lbl->TabIndex = 7;
+			   this->Welcome_lbl->Text = L"Welcome";
+			   this->Welcome_lbl->TextAlign = System::Drawing::ContentAlignment::TopCenter;
+			   // 
+			   // cn_FileMenu
+			   // 
+			   this->cn_FileMenu->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			   this->cn_FileMenu->Location = System::Drawing::Point(500, 311);
+			   this->cn_FileMenu->Name = L"cn_FileMenu";
+			   this->cn_FileMenu->Orientation = System::Windows::Forms::Orientation::Horizontal;
+			   // 
+			   // cn_FileMenu.Panel1
+			   // 
+			   this->cn_FileMenu->Panel1->Controls->Add(this->btn_selectFile);
+			   // 
+			   // cn_FileMenu.Panel2
+			   // 
+			   this->cn_FileMenu->Panel2->BackColor = System::Drawing::Color::Transparent;
+			   this->cn_FileMenu->Panel2->Controls->Add(this->btn_newFile);
+			   this->cn_FileMenu->Panel2->Controls->Add(this->btn_Browse);
+			   this->cn_FileMenu->Panel2Collapsed = true;
+			   this->cn_FileMenu->Size = System::Drawing::Size(150, 60);
+			   this->cn_FileMenu->SplitterDistance = 31;
+			   this->cn_FileMenu->TabIndex = 10;
+			   this->cn_FileMenu->Leave += gcnew System::EventHandler(this, &MyForm::cn_FileMenu_Leave);
+			   // 
+			   // btn_selectFile
+			   // 
+			   this->btn_selectFile->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
+			   this->btn_selectFile->Dock = System::Windows::Forms::DockStyle::Fill;
+			   this->btn_selectFile->FlatAppearance->BorderSize = 0;
+			   this->btn_selectFile->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->btn_selectFile->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->btn_selectFile->ForeColor = System::Drawing::SystemColors::Control;
+			   this->btn_selectFile->Location = System::Drawing::Point(0, 0);
+			   this->btn_selectFile->Margin = System::Windows::Forms::Padding(0);
+			   this->btn_selectFile->Name = L"btn_selectFile";
+			   this->btn_selectFile->RightToLeft = System::Windows::Forms::RightToLeft::No;
+			   this->btn_selectFile->Size = System::Drawing::Size(150, 60);
+			   this->btn_selectFile->TabIndex = 9;
+			   this->btn_selectFile->Text = L"File";
+			   this->btn_selectFile->UseVisualStyleBackColor = false;
+			   this->btn_selectFile->Click += gcnew System::EventHandler(this, &MyForm::btn_selectFile_Click);
+			   // 
+			   // btn_newFile
+			   // 
+			   this->btn_newFile->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(23)), static_cast<System::Int32>(static_cast<System::Byte>(24)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(29)));
+			   this->btn_newFile->Dock = System::Windows::Forms::DockStyle::Bottom;
+			   this->btn_newFile->FlatAppearance->BorderSize = 0;
+			   this->btn_newFile->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->btn_newFile->Font = (gcnew System::Drawing::Font(L"Corbel Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->btn_newFile->ForeColor = System::Drawing::SystemColors::Control;
+			   this->btn_newFile->Location = System::Drawing::Point(0, -4);
+			   this->btn_newFile->Margin = System::Windows::Forms::Padding(0);
+			   this->btn_newFile->Name = L"btn_newFile";
+			   this->btn_newFile->Padding = System::Windows::Forms::Padding(5);
+			   this->btn_newFile->Size = System::Drawing::Size(150, 50);
+			   this->btn_newFile->TabIndex = 9;
+			   this->btn_newFile->Text = L"New";
+			   this->btn_newFile->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			   this->btn_newFile->UseVisualStyleBackColor = false;
+			   this->btn_newFile->Click += gcnew System::EventHandler(this, &MyForm::btn_newFile_Click);
+			   // 
+			   // btn_Browse
+			   // 
+			   this->btn_Browse->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(23)), static_cast<System::Int32>(static_cast<System::Byte>(24)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(29)));
+			   this->btn_Browse->Dock = System::Windows::Forms::DockStyle::Top;
+			   this->btn_Browse->FlatAppearance->BorderSize = 0;
+			   this->btn_Browse->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->btn_Browse->Font = (gcnew System::Drawing::Font(L"Corbel Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->btn_Browse->ForeColor = System::Drawing::SystemColors::Control;
+			   this->btn_Browse->Location = System::Drawing::Point(0, 0);
+			   this->btn_Browse->Name = L"btn_Browse";
+			   this->btn_Browse->Padding = System::Windows::Forms::Padding(5);
+			   this->btn_Browse->Size = System::Drawing::Size(150, 50);
+			   this->btn_Browse->TabIndex = 8;
+			   this->btn_Browse->Text = L"Open ";
+			   this->btn_Browse->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			   this->btn_Browse->UseVisualStyleBackColor = false;
+			   this->btn_Browse->Click += gcnew System::EventHandler(this, &MyForm::btn_Browse_Click);
+			   // 
+			   // lbl_FileName
+			   // 
+			   this->lbl_FileName->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			   this->lbl_FileName->AutoSize = true;
+			   this->lbl_FileName->Font = (gcnew System::Drawing::Font(L"Corbel Light", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->lbl_FileName->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(252)), static_cast<System::Int32>(static_cast<System::Byte>(217)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(184)));
+			   this->lbl_FileName->Location = System::Drawing::Point(495, 394);
+			   this->lbl_FileName->Margin = System::Windows::Forms::Padding(3, 20, 3, 0);
+			   this->lbl_FileName->Name = L"lbl_FileName";
+			   this->lbl_FileName->Size = System::Drawing::Size(160, 26);
+			   this->lbl_FileName->TabIndex = 9;
+			   this->lbl_FileName->Text = L"No File is Selected";
+			   this->lbl_FileName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			   // 
 			   // pn_Formatting
 			   // 
@@ -508,7 +723,7 @@ namespace GUITest2 {
 			   this->pn_Formatting->Dock = System::Windows::Forms::DockStyle::Fill;
 			   this->pn_Formatting->Location = System::Drawing::Point(0, 0);
 			   this->pn_Formatting->Name = L"pn_Formatting";
-			   this->pn_Formatting->Size = System::Drawing::Size(1300, 613);
+			   this->pn_Formatting->Size = System::Drawing::Size(1300, 586);
 			   this->pn_Formatting->TabIndex = 2;
 			   // 
 			   // panel2
@@ -519,7 +734,7 @@ namespace GUITest2 {
 			   this->panel2->Location = System::Drawing::Point(0, 0);
 			   this->panel2->Margin = System::Windows::Forms::Padding(50);
 			   this->panel2->Name = L"panel2";
-			   this->panel2->Size = System::Drawing::Size(1300, 613);
+			   this->panel2->Size = System::Drawing::Size(1300, 586);
 			   this->panel2->TabIndex = 3;
 			   // 
 			   // Format_toolStrip
@@ -655,178 +870,26 @@ namespace GUITest2 {
 			   this->tb_XML_viewer->Multiline = true;
 			   this->tb_XML_viewer->Name = L"tb_XML_viewer";
 			   this->tb_XML_viewer->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-			   this->tb_XML_viewer->Size = System::Drawing::Size(1200, 457);
+			   this->tb_XML_viewer->Size = System::Drawing::Size(1200, 430);
 			   this->tb_XML_viewer->TabIndex = 4;
 			   this->tb_XML_viewer->Text = L"Select an operation";
 			   this->tb_XML_viewer->TextChanged += gcnew System::EventHandler(this, &MyForm::tb_XML_viewer_TextChanged);
-			   // 
-			   // pn_Home
-			   // 
-			   this->pn_Home->Controls->Add(this->flowLayoutPanel2);
-			   this->pn_Home->Dock = System::Windows::Forms::DockStyle::Fill;
-			   this->pn_Home->Location = System::Drawing::Point(0, 0);
-			   this->pn_Home->Name = L"pn_Home";
-			   this->pn_Home->Size = System::Drawing::Size(1300, 613);
-			   this->pn_Home->TabIndex = 0;
-			   // 
-			   // flowLayoutPanel2
-			   // 
-			   this->flowLayoutPanel2->Controls->Add(this->Welcome_lbl);
-			   this->flowLayoutPanel2->Controls->Add(this->cn_FileMenu);
-			   this->flowLayoutPanel2->Controls->Add(this->lbl_FileName);
-			   this->flowLayoutPanel2->Dock = System::Windows::Forms::DockStyle::Fill;
-			   this->flowLayoutPanel2->FlowDirection = System::Windows::Forms::FlowDirection::TopDown;
-			   this->flowLayoutPanel2->Location = System::Drawing::Point(0, 0);
-			   this->flowLayoutPanel2->Name = L"flowLayoutPanel2";
-			   this->flowLayoutPanel2->Size = System::Drawing::Size(1300, 613);
-			   this->flowLayoutPanel2->TabIndex = 0;
-			   // 
-			   // Welcome_lbl
-			   // 
-			   this->Welcome_lbl->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			   this->Welcome_lbl->AutoSize = true;
-			   this->Welcome_lbl->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 72, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				   static_cast<System::Byte>(0)));
-			   this->Welcome_lbl->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
-			   this->Welcome_lbl->Location = System::Drawing::Point(350, 100);
-			   this->Welcome_lbl->Margin = System::Windows::Forms::Padding(350, 100, 350, 100);
-			   this->Welcome_lbl->Name = L"Welcome_lbl";
-			   this->Welcome_lbl->Size = System::Drawing::Size(451, 108);
-			   this->Welcome_lbl->TabIndex = 7;
-			   this->Welcome_lbl->Text = L"Welcome";
-			   this->Welcome_lbl->TextAlign = System::Drawing::ContentAlignment::TopCenter;
-			   // 
-			   // cn_FileMenu
-			   // 
-			   this->cn_FileMenu->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			   this->cn_FileMenu->Location = System::Drawing::Point(500, 311);
-			   this->cn_FileMenu->Name = L"cn_FileMenu";
-			   this->cn_FileMenu->Orientation = System::Windows::Forms::Orientation::Horizontal;
-			   // 
-			   // cn_FileMenu.Panel1
-			   // 
-			   this->cn_FileMenu->Panel1->Controls->Add(this->btn_selectFile);
-			   // 
-			   // cn_FileMenu.Panel2
-			   // 
-			   this->cn_FileMenu->Panel2->BackColor = System::Drawing::Color::Transparent;
-			   this->cn_FileMenu->Panel2->Controls->Add(this->btn_newFile);
-			   this->cn_FileMenu->Panel2->Controls->Add(this->btn_Browse);
-			   this->cn_FileMenu->Panel2Collapsed = true;
-			   this->cn_FileMenu->Size = System::Drawing::Size(150, 60);
-			   this->cn_FileMenu->SplitterDistance = 31;
-			   this->cn_FileMenu->TabIndex = 10;
-			   this->cn_FileMenu->Leave += gcnew System::EventHandler(this, &MyForm::cn_FileMenu_Leave);
-			   // 
-			   // btn_selectFile
-			   // 
-			   this->btn_selectFile->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
-			   this->btn_selectFile->Dock = System::Windows::Forms::DockStyle::Fill;
-			   this->btn_selectFile->FlatAppearance->BorderSize = 0;
-			   this->btn_selectFile->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->btn_selectFile->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				   static_cast<System::Byte>(0)));
-			   this->btn_selectFile->ForeColor = System::Drawing::SystemColors::Control;
-			   this->btn_selectFile->Location = System::Drawing::Point(0, 0);
-			   this->btn_selectFile->Margin = System::Windows::Forms::Padding(0);
-			   this->btn_selectFile->Name = L"btn_selectFile";
-			   this->btn_selectFile->RightToLeft = System::Windows::Forms::RightToLeft::No;
-			   this->btn_selectFile->Size = System::Drawing::Size(150, 60);
-			   this->btn_selectFile->TabIndex = 9;
-			   this->btn_selectFile->Text = L"File";
-			   this->btn_selectFile->UseVisualStyleBackColor = false;
-			   this->btn_selectFile->Click += gcnew System::EventHandler(this, &MyForm::btn_selectFile_Click);
-			   // 
-			   // btn_newFile
-			   // 
-			   this->btn_newFile->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(23)), static_cast<System::Int32>(static_cast<System::Byte>(24)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(29)));
-			   this->btn_newFile->Dock = System::Windows::Forms::DockStyle::Bottom;
-			   this->btn_newFile->FlatAppearance->BorderSize = 0;
-			   this->btn_newFile->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->btn_newFile->Font = (gcnew System::Drawing::Font(L"Corbel Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				   static_cast<System::Byte>(0)));
-			   this->btn_newFile->ForeColor = System::Drawing::SystemColors::Control;
-			   this->btn_newFile->Location = System::Drawing::Point(0, -4);
-			   this->btn_newFile->Margin = System::Windows::Forms::Padding(0);
-			   this->btn_newFile->Name = L"btn_newFile";
-			   this->btn_newFile->Padding = System::Windows::Forms::Padding(5);
-			   this->btn_newFile->Size = System::Drawing::Size(150, 50);
-			   this->btn_newFile->TabIndex = 9;
-			   this->btn_newFile->Text = L"New";
-			   this->btn_newFile->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			   this->btn_newFile->UseVisualStyleBackColor = false;
-			   this->btn_newFile->Click += gcnew System::EventHandler(this, &MyForm::btn_newFile_Click);
-			   // 
-			   // btn_Browse
-			   // 
-			   this->btn_Browse->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(23)), static_cast<System::Int32>(static_cast<System::Byte>(24)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(29)));
-			   this->btn_Browse->Dock = System::Windows::Forms::DockStyle::Top;
-			   this->btn_Browse->FlatAppearance->BorderSize = 0;
-			   this->btn_Browse->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->btn_Browse->Font = (gcnew System::Drawing::Font(L"Corbel Light", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				   static_cast<System::Byte>(0)));
-			   this->btn_Browse->ForeColor = System::Drawing::SystemColors::Control;
-			   this->btn_Browse->Location = System::Drawing::Point(0, 0);
-			   this->btn_Browse->Name = L"btn_Browse";
-			   this->btn_Browse->Padding = System::Windows::Forms::Padding(5);
-			   this->btn_Browse->Size = System::Drawing::Size(150, 50);
-			   this->btn_Browse->TabIndex = 8;
-			   this->btn_Browse->Text = L"Open ";
-			   this->btn_Browse->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			   this->btn_Browse->UseVisualStyleBackColor = false;
-			   this->btn_Browse->Click += gcnew System::EventHandler(this, &MyForm::btn_Browse_Click);
-			   // 
-			   // lbl_FileName
-			   // 
-			   this->lbl_FileName->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			   this->lbl_FileName->AutoSize = true;
-			   this->lbl_FileName->Font = (gcnew System::Drawing::Font(L"Corbel Light", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				   static_cast<System::Byte>(0)));
-			   this->lbl_FileName->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(252)), static_cast<System::Int32>(static_cast<System::Byte>(217)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(184)));
-			   this->lbl_FileName->Location = System::Drawing::Point(495, 394);
-			   this->lbl_FileName->Margin = System::Windows::Forms::Padding(3, 20, 3, 0);
-			   this->lbl_FileName->Name = L"lbl_FileName";
-			   this->lbl_FileName->Size = System::Drawing::Size(160, 26);
-			   this->lbl_FileName->TabIndex = 9;
-			   this->lbl_FileName->Text = L"No File is Selected";
-			   this->lbl_FileName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			   // 
 			   // pn_Insights
 			   // 
 			   this->pn_Insights->Dock = System::Windows::Forms::DockStyle::Fill;
 			   this->pn_Insights->Location = System::Drawing::Point(0, 0);
 			   this->pn_Insights->Name = L"pn_Insights";
-			   this->pn_Insights->Size = System::Drawing::Size(1300, 613);
+			   this->pn_Insights->Size = System::Drawing::Size(1300, 586);
 			   this->pn_Insights->TabIndex = 4;
-			   // 
-			   // pn_compression
-			   // 
-			   this->pn_compression->Controls->Add(this->progressBar1);
-			   this->pn_compression->Dock = System::Windows::Forms::DockStyle::Fill;
-			   this->pn_compression->Location = System::Drawing::Point(0, 0);
-			   this->pn_compression->Name = L"pn_compression";
-			   this->pn_compression->Size = System::Drawing::Size(1300, 613);
-			   this->pn_compression->TabIndex = 3;
 			   // 
 			   // pn_consistency
 			   // 
 			   this->pn_consistency->Dock = System::Windows::Forms::DockStyle::Fill;
 			   this->pn_consistency->Location = System::Drawing::Point(0, 0);
 			   this->pn_consistency->Name = L"pn_consistency";
-			   this->pn_consistency->Size = System::Drawing::Size(1300, 613);
+			   this->pn_consistency->Size = System::Drawing::Size(1300, 586);
 			   this->pn_consistency->TabIndex = 1;
-			   // 
-			   // progressBar1
-			   // 
-			   this->progressBar1->Location = System::Drawing::Point(264, 396);
-			   this->progressBar1->Name = L"progressBar1";
-			   this->progressBar1->Size = System::Drawing::Size(424, 23);
-			   this->progressBar1->TabIndex = 0;
 			   // 
 			   // MyForm
 			   // 
@@ -857,11 +920,8 @@ namespace GUITest2 {
 			   this->pn_sb->ResumeLayout(false);
 			   this->pn_sb->PerformLayout();
 			   this->pn_cn->ResumeLayout(false);
-			   this->pn_Formatting->ResumeLayout(false);
-			   this->panel2->ResumeLayout(false);
-			   this->panel2->PerformLayout();
-			   this->Format_toolStrip->ResumeLayout(false);
-			   this->Format_toolStrip->PerformLayout();
+			   this->pn_compression->ResumeLayout(false);
+			   this->flowLayoutPanel1->ResumeLayout(false);
 			   this->pn_Home->ResumeLayout(false);
 			   this->flowLayoutPanel2->ResumeLayout(false);
 			   this->flowLayoutPanel2->PerformLayout();
@@ -869,7 +929,11 @@ namespace GUITest2 {
 			   this->cn_FileMenu->Panel2->ResumeLayout(false);
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->cn_FileMenu))->EndInit();
 			   this->cn_FileMenu->ResumeLayout(false);
-			   this->pn_compression->ResumeLayout(false);
+			   this->pn_Formatting->ResumeLayout(false);
+			   this->panel2->ResumeLayout(false);
+			   this->panel2->PerformLayout();
+			   this->Format_toolStrip->ResumeLayout(false);
+			   this->Format_toolStrip->PerformLayout();
 			   this->ResumeLayout(false);
 
 		   }
@@ -1177,11 +1241,24 @@ namespace GUITest2 {
 		
 	}
 
-private: System::Void Corrector_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void Corrector_Click(System::Object^ sender, System::EventArgs^ e) {
+	
+	}
+			//------------------------
+			//	compress window
+			//------------------------
 
-}
+	private: System::Void minify_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+		file->toArray();
+		vector <string> elements = file->getElements();
 
 
+
+		string text = minify(elements);
+		file->saveFile(Adapter::to_unmanaged(Adapter::to_managed(text)));
+		c_Status->Text = "minifying complete";
+		unsavedChanges = false;
+	}
 		   //------------------------------------
 		   //	||							||
 		   //	||	other useful functions	||
@@ -1208,33 +1285,34 @@ private: System::Void Corrector_Click(System::Object^ sender, System::EventArgs^
 	private: System::Void Validator_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 		   //show original XML File
-		   void ViewFileXml() {
-			   if (file == nullptr) {
-				   //tb_XML_viewer->Text = "Error: no file is selected\r\nSelect a file first to proceed";
-				   //c_Status->Text = "loading Unuccessful";
-				   c_Status->Text = "Error: no file is selected. Select a file first to proceed";
-			   }
-			   else {
-				   //file->toArray();
-				   //vector<string> elements = file->getElements();
+	void ViewFileXml() {
+		if (file == nullptr) {
+			//tb_XML_viewer->Text = "Error: no file is selected\r\nSelect a file first to proceed";
+			//c_Status->Text = "loading Unuccessful";
+			c_Status->Text = "Error: no file is selected. Select a file first to proceed";
+		}
+		else {
+			//file->toArray();
+			//vector<string> elements = file->getElements();
 
-				   tb_XML_viewer->Text = Adapter::to_managed(file->exportFile())->Replace("\n", Environment::NewLine);
-				   /*
-				   for (int i = 0; i < elements.size(); i++) {
-					   tb_XML_viewer->Text += Adapter::to_managed(elements.front());
-					   elements.erase(elements.begin());
-					   tb_XML_viewer->Text += "\r\n";
-				   }
-				   */
+			tb_XML_viewer->Text = Adapter::to_managed(file->exportFile())->Replace("\n", Environment::NewLine);
+			/*
+			for (int i = 0; i < elements.size(); i++) {
+				   tb_XML_viewer->Text += Adapter::to_managed(elements.front());
+				   elements.erase(elements.begin());
+				   tb_XML_viewer->Text += "\r\n";
+			}
+			*/
 
-				   c_Status->Text = "loading Successful";
-			   }
-		   }
+			c_Status->Text = "loading Successful";
+		}
+	}
 		   //assign file name
 	public: Void setFile(String^ fileName) {
 		this->file = new File(Adapter::to_unmanaged(fileName));
 		lbl_FileName->Text = fileName;
 	}
+
 
 
 
