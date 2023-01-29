@@ -1,5 +1,6 @@
 #pragma once
 
+
 namespace GUITest2 {
 
 	using namespace System;
@@ -61,9 +62,7 @@ namespace GUITest2 {
 		int movx;
 		int movy;
 		String^ path;
-
-
-		   ErrorProvider error;
+		ErrorProvider error;
 
 
 
@@ -385,17 +384,20 @@ namespace GUITest2 {
 	}
 
 	private: System::Void btn_createFile_Click(System::Object^ sender, System::EventArgs^ e) {
-		System::String^ path = txt_fileLocation->Text + "\\" + txt_fileName->Text + ".txt";
-		System::IO::File::Create(path);
-		this->path = path;
-		Form::Close();
+		path = txt_fileLocation->Text + "\\" + txt_fileName->Text + ".txt";
+		//System::IO::File::Create(path);
+		//System::IO::File::Close()
+		System::IO::FileStream^ fs = System::IO::File::Create(path);
+		fs->Close();
+		//Form::Close();
 	}
 
 
 	public: String^ getfilePath() {	
 		return path;
 	}
-
+	
+	//validators
 	private: System::Void txt_fileName_Validating(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) {
 		TextBox^ tb = (TextBox^)sender;
 		if (String::IsNullOrWhiteSpace(txt_fileName->Text)) {
