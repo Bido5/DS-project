@@ -8,7 +8,20 @@
 
 using namespace std;
 
-int count = 0;
+// int count = 0;
+vector<string> postsList;
+
+vector<string> Node::getChildren(Node *node)
+{
+    vector<string> childrenNames;
+    for (int i = 0; i < children.size(); i++)
+    {
+        childrenNames.push_back(node->children[i]->data);
+        cout << endl
+             << node->children[i]->data;
+    }
+    return childrenNames;
+}
 
 // this class is used to build tree depth first after receiving them in a vector
 int nextIndex = 1;
@@ -32,5 +45,70 @@ void Node::buildTree(vector<string> xml)
         {
             d->buildTree(xml); // building tree depth first;
         }
+    }
+}
+string bodyTextTopic;
+void Node::searchByTopic(Node *root, string topic)
+{
+    bool foundTopic = false;
+    // leaf case
+    if (root == NULL)
+    {
+        return;
+    }
+    for (int i = 0; i < root->children.size(); i++)
+    {
+
+        if (root->data == "<body>")
+        {
+            bodyTextTopic = root->children[0]->data;
+        }
+        if (root->data == "<topic>")
+        {
+            cout << endl
+                 << root->children[0]->data << " vs " << topic << endl;
+            string currentTopic;
+            currentTopic = (root->children[0]->data);
+            cout << "comparison" << currentTopic.compare(topic) << endl;
+            if (currentTopic.compare(topic) == 0)
+            {
+                cout << "innnn";
+                // cout<<"found it"<<endl;
+                foundTopic = true;
+            }
+            if (foundTopic == true)
+            {
+                postsList.push_back(bodyTextTopic);
+                cout << "*****" << bodyTextTopic << endl;
+                foundTopic = false;
+            }
+        }
+
+        if (root->children[0]->children != NULL)
+        {
+            searchByTopic(root->children[i], topic);
+        }
+    }
+}
+string bodyText;
+void Node::searchByWord(Node *root, string word)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        if (root->data == "<body>")
+        {
+            bodyText = root->children[0]->data;
+            if (bodyText.find(word) != string::npos) // to see if it is found in the body
+            {
+                cout << "found !!!!!!!!!!!";
+            }
+        }
+
+        searchByWord(root->children[i], word);
     }
 }

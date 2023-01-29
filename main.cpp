@@ -94,6 +94,10 @@ int main()
     Node *trial = new Node(elementsTry[0]);
     // Node *trial =new Node("5");
     trial->buildTree(elementsTry);
+    cout << "**********" << endl;
+    cout << "started" << endl;
+    cout << "**********" << endl;
+    trial->searchByTopic(trial, "economy");
     cout << "finish";
 
     string fileLine;
