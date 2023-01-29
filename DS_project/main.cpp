@@ -65,7 +65,7 @@ vector <string> Consistency (string str){
                     if (st.empty())
                     {
                         //cout << "Missing opening tag -> " << close_tag << endl;
-                        Errors.push_back("Missing opening tag -> " + close_tag + "\n");
+                        Errors.push_back("Missing opening tag for -> " + close_tag +" in line :"+ to_string(line)+ "\n");
                         while (!error_stack.empty()) {
                             st.push(error_stack.top());
                             error_stack.pop();
@@ -128,8 +128,7 @@ vector <string> Consistency (string str){
                         }
                         if (st.empty())
                         {
-                           // cout << "Missing opening tag -> " << close_tag << endl;
-                            Errors.push_back("Missing opening tag -> "  + close_tag +"\n");
+                            Errors.push_back("Missing opening tag for -> "  + close_tag +" in line :"+ to_string(line)+"\n");
                             while (!error_stack.empty()) {
                                 st.push(error_stack.top());
                                 error_stack.pop();
@@ -147,9 +146,6 @@ vector <string> Consistency (string str){
         line++;
     }
 
-
-//   if flag == true;
-
     while (!error_stack.empty()) {
 
         Errors.push_back("Missing closing tag -> " + error_stack.top().first + " in line: " + to_string(error_stack.top().second)+"\n");
@@ -158,26 +154,20 @@ vector <string> Consistency (string str){
 
     return Errors;
 
-    while (!st.empty()) {
-
-        cout << "line: " << st.top().second;
-        cout << "  The top of the stack in is : " << st.top().first << endl;
-        st.pop();
-    }
 }
 
 vector <string> correction (string str )
 {
-    
-
 
 }
+
 
 
 int main() {
     string str;
     freopen("sample.in", "r", stdin);
     vector <string > test ;
+
     test=Consistency(str);
     int g =0;
     while (g<test.size()) {
@@ -186,5 +176,3 @@ int main() {
     }
     return 0;
 }
-
-
