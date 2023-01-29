@@ -4,8 +4,6 @@
 
 using namespace std;
 
-void checker(string str,string tag,int start_subStr , int end_subStr,bool flag_error, int line , stack<pair<string,int>> stack ) ;
-
 vector <string> Consistency (string str){
     int end_subStr = 0;
     stack<pair<string, int>> st;
@@ -15,6 +13,7 @@ vector <string> Consistency (string str){
     bool flag_error;
     stack<pair<string, int>> error_stack;
     vector <int > output ;
+    vector <string>  Errors;
 
     while (getline(cin, str)) {
 
@@ -25,7 +24,8 @@ vector <string> Consistency (string str){
 
         /*checking if any of token is missed*/
         if ((start_subStr == -1 && end_subStr != -1) || (start_subStr != -1 && end_subStr == -1)) {
-            cout << "Missing token in line: " << line << endl;
+           // cout << "Missing token in line: " << line << endl;
+            Errors.push_back("Missing token in line: " +to_string(line)+ "\n");
             start_subStr = 0, end_subStr = 0;
             line++;
             continue;
@@ -37,10 +37,12 @@ vector <string> Consistency (string str){
             else if ((flag_error && tag.find('<') != string::npos) && end_subStr != -1 &&
                      tag[tag.find('<') + 1] != '/') {
                 st.push({tag.substr(tag.find('<') + 1, end_subStr - start_subStr - 1), (line)});
-                cout << "Missing token in line: " << line << endl;
+               // cout << "Missing token in line: " << line << endl;
+                Errors.push_back("Missing token in line: " +to_string(line)+ "\n");
 
             } else {
-                cout << "Missing token in line: " << line << endl;
+              //  cout << "Missing token in line: " << line << endl;
+                Errors.push_back("Missing token in line: " +to_string(line)+ "\n");
             }
         }
         if ((str[start_subStr]) == '<' && str[start_subStr + 1] == '/') {
@@ -62,7 +64,8 @@ vector <string> Consistency (string str){
                     }
                     if (st.empty())
                     {
-                        cout << "Missing opening tag -> " << close_tag << endl;
+                        //cout << "Missing opening tag -> " << close_tag << endl;
+                        Errors.push_back("Missing opening tag -> " + close_tag + "\n");
                         while (!error_stack.empty()) {
                             st.push(error_stack.top());
                             error_stack.pop();
@@ -84,7 +87,8 @@ vector <string> Consistency (string str){
             flag_error = (tag.find('<') != string::npos || tag.find('>') != string::npos || end_subStr == -1);
 
             if ((start_subStr == -1 && end_subStr != -1) || (start_subStr != -1 && end_subStr == -1)) {
-                cout << "Missing token in line: " << line << endl;
+             //   cout << "Missing token in line: " << line << endl;
+                Errors.push_back("Missing token in line: " + to_string(line) + "\n");
                 start_subStr = 0, end_subStr = 0;
                 line++;
                 continue;
@@ -97,10 +101,13 @@ vector <string> Consistency (string str){
                 else if ((flag_error && tag.find('<') != string::npos) && end_subStr != -1 &&
                          tag[tag.find('<') + 1] != '/') {
                     st.push({tag.substr(tag.find('<') + 1, end_subStr - start_subStr - 1), (line)});
-                    cout << "Missing token in line: " << line << endl;
+                    //cout << "Missing token in line: " << line << endl;
+                    Errors.push_back("Missing token in line: " + to_string(line) + "\n");
+
 
                 } else {
-                    cout << "Missing token in line: " << line << endl;
+                    //cout << "Missing token in line: " << line << endl;
+                    Errors.push_back("Missing token in line: " + to_string(line) + "\n");
                 }
             }
             if ((str[start_subStr]) == '<' && str[start_subStr + 1] == '/') {
@@ -121,7 +128,8 @@ vector <string> Consistency (string str){
                         }
                         if (st.empty())
                         {
-                            cout << "Missing opening tag -> " << close_tag << endl;
+                           // cout << "Missing opening tag -> " << close_tag << endl;
+                            Errors.push_back("Missing opening tag -> "  + close_tag +"\n");
                             while (!error_stack.empty()) {
                                 st.push(error_stack.top());
                                 error_stack.pop();
@@ -139,7 +147,7 @@ vector <string> Consistency (string str){
         line++;
     }
 
-    vector <string>  Errors;
+
 //   if flag == true;
 
     while (!error_stack.empty()) {
@@ -147,11 +155,7 @@ vector <string> Consistency (string str){
         Errors.push_back("Missing closing tag -> " + error_stack.top().first + " in line: " + to_string(error_stack.top().second)+"\n");
         error_stack.pop();
     }
-    int g =0;
-    while (g<Errors.size()) {
-        cout << Errors.at(g);
-        g++;
-    }
+
     return Errors;
 
     while (!st.empty()) {
@@ -170,22 +174,17 @@ vector <string> correction (string str )
 }
 
 
-
-
 int main() {
     string str;
     freopen("sample.in", "r", stdin);
-
-    Consistency(str);
-
-
-
-
-
+    vector <string > test ;
+    test=Consistency(str);
+    int g =0;
+    while (g<test.size()) {
+        cout << test.at(g);
+        g++;
+    }
     return 0;
 }
-
-
-
 
 
