@@ -58,7 +58,8 @@ vector<string> File::getElements() {
     return elements;
 }
 void File::saveFile(string text) {
-    xfile.open(fileName);
+    //xfile.open(fileName);
+    xfile.open(fileName, std::ofstream::out | std::ofstream::trunc);
     xfile << text;
     xfile.close();
 }
@@ -66,7 +67,7 @@ void File::saveFile(string text) {
 string File::exportFile()
 {
     string line;
-    string text = NULL;
+    string text = "";
 
     xfile.open(fileName);
     while (!xfile.eof()) {
@@ -74,6 +75,7 @@ string File::exportFile()
         text += line;
         text += "\n";
     }
+  
     xfile.close();
     return text;
 }

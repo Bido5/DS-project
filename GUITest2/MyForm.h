@@ -117,6 +117,7 @@ namespace GUITest2 {
 	private: System::Windows::Forms::FlowLayoutPanel^ flowLayoutPanel1;
 	private: System::Windows::Forms::Button^ minify_btn;
 	private: System::Windows::Forms::Button^ btn_decompress;
+	private: System::Windows::Forms::Button^ btn_stCollapse;
 
 
 
@@ -156,20 +157,13 @@ namespace GUITest2 {
 			   this->button1 = (gcnew System::Windows::Forms::Button());
 			   this->c_Status = (gcnew System::Windows::Forms::Label());
 			   this->Status_lb = (gcnew System::Windows::Forms::Label());
+			   this->btn_stCollapse = (gcnew System::Windows::Forms::Button());
 			   this->pn_cn = (gcnew System::Windows::Forms::Panel());
 			   this->pn_compression = (gcnew System::Windows::Forms::Panel());
 			   this->flowLayoutPanel1 = (gcnew System::Windows::Forms::FlowLayoutPanel());
 			   this->minify_btn = (gcnew System::Windows::Forms::Button());
 			   this->compress_btn = (gcnew System::Windows::Forms::Button());
 			   this->btn_decompress = (gcnew System::Windows::Forms::Button());
-			   this->pn_Home = (gcnew System::Windows::Forms::Panel());
-			   this->flowLayoutPanel2 = (gcnew System::Windows::Forms::FlowLayoutPanel());
-			   this->Welcome_lbl = (gcnew System::Windows::Forms::Label());
-			   this->cn_FileMenu = (gcnew System::Windows::Forms::SplitContainer());
-			   this->btn_selectFile = (gcnew System::Windows::Forms::Button());
-			   this->btn_newFile = (gcnew System::Windows::Forms::Button());
-			   this->btn_Browse = (gcnew System::Windows::Forms::Button());
-			   this->lbl_FileName = (gcnew System::Windows::Forms::Label());
 			   this->pn_Formatting = (gcnew System::Windows::Forms::Panel());
 			   this->panel2 = (gcnew System::Windows::Forms::Panel());
 			   this->Format_toolStrip = (gcnew System::Windows::Forms::ToolStrip());
@@ -182,6 +176,14 @@ namespace GUITest2 {
 			   this->Corrector = (gcnew System::Windows::Forms::ToolStripButton());
 			   this->btn_restore = (gcnew System::Windows::Forms::ToolStripButton());
 			   this->tb_XML_viewer = (gcnew System::Windows::Forms::TextBox());
+			   this->pn_Home = (gcnew System::Windows::Forms::Panel());
+			   this->flowLayoutPanel2 = (gcnew System::Windows::Forms::FlowLayoutPanel());
+			   this->Welcome_lbl = (gcnew System::Windows::Forms::Label());
+			   this->cn_FileMenu = (gcnew System::Windows::Forms::SplitContainer());
+			   this->btn_selectFile = (gcnew System::Windows::Forms::Button());
+			   this->btn_newFile = (gcnew System::Windows::Forms::Button());
+			   this->btn_Browse = (gcnew System::Windows::Forms::Button());
+			   this->lbl_FileName = (gcnew System::Windows::Forms::Label());
 			   this->pn_Insights = (gcnew System::Windows::Forms::Panel());
 			   this->pn_consistency = (gcnew System::Windows::Forms::Panel());
 			   this->pn_tb->SuspendLayout();
@@ -193,15 +195,15 @@ namespace GUITest2 {
 			   this->pn_cn->SuspendLayout();
 			   this->pn_compression->SuspendLayout();
 			   this->flowLayoutPanel1->SuspendLayout();
+			   this->pn_Formatting->SuspendLayout();
+			   this->panel2->SuspendLayout();
+			   this->Format_toolStrip->SuspendLayout();
 			   this->pn_Home->SuspendLayout();
 			   this->flowLayoutPanel2->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->cn_FileMenu))->BeginInit();
 			   this->cn_FileMenu->Panel1->SuspendLayout();
 			   this->cn_FileMenu->Panel2->SuspendLayout();
 			   this->cn_FileMenu->SuspendLayout();
-			   this->pn_Formatting->SuspendLayout();
-			   this->panel2->SuspendLayout();
-			   this->Format_toolStrip->SuspendLayout();
 			   this->SuspendLayout();
 			   // 
 			   // pn_tb
@@ -332,17 +334,16 @@ namespace GUITest2 {
 			   // collapse_btn
 			   // 
 			   this->collapse_btn->Anchor = System::Windows::Forms::AnchorStyles::Top;
-			   this->collapse_btn->BackColor = System::Drawing::Color::Transparent;
-			   this->collapse_btn->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"collapse_btn.BackgroundImage")));
-			   this->collapse_btn->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
+			   this->collapse_btn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
 			   this->collapse_btn->FlatAppearance->BorderSize = 0;
 			   this->collapse_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			   this->collapse_btn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
 			   this->collapse_btn->ForeColor = System::Drawing::SystemColors::Control;
-			   this->collapse_btn->Location = System::Drawing::Point(164, 3);
+			   this->collapse_btn->Location = System::Drawing::Point(180, 3);
 			   this->collapse_btn->Name = L"collapse_btn";
-			   this->collapse_btn->Size = System::Drawing::Size(33, 28);
+			   this->collapse_btn->Size = System::Drawing::Size(17, 40);
 			   this->collapse_btn->TabIndex = 4;
 			   this->collapse_btn->UseVisualStyleBackColor = false;
 			   this->collapse_btn->Click += gcnew System::EventHandler(this, &MyForm::collapse_btn_Click);
@@ -351,7 +352,8 @@ namespace GUITest2 {
 			   // 
 			   this->big_Logo->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"big_Logo.BackgroundImage")));
 			   this->big_Logo->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
-			   this->big_Logo->Location = System::Drawing::Point(0, 37);
+			   this->big_Logo->Location = System::Drawing::Point(0, 46);
+			   this->big_Logo->Margin = System::Windows::Forms::Padding(3, 0, 3, 3);
 			   this->big_Logo->Name = L"big_Logo";
 			   this->big_Logo->Size = System::Drawing::Size(197, 86);
 			   this->big_Logo->TabIndex = 5;
@@ -447,6 +449,7 @@ namespace GUITest2 {
 			   this->pn_sb->Controls->Add(this->button1);
 			   this->pn_sb->Controls->Add(this->c_Status);
 			   this->pn_sb->Controls->Add(this->Status_lb);
+			   this->pn_sb->Controls->Add(this->btn_stCollapse);
 			   this->pn_sb->Dock = System::Windows::Forms::DockStyle::Bottom;
 			   this->pn_sb->Location = System::Drawing::Point(200, 647);
 			   this->pn_sb->Name = L"pn_sb";
@@ -478,7 +481,6 @@ namespace GUITest2 {
 			   this->c_Status->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
 			   this->c_Status->Location = System::Drawing::Point(136, 32);
-			   this->c_Status->MaximumSize = System::Drawing::Size(0, 23);
 			   this->c_Status->Name = L"c_Status";
 			   this->c_Status->Size = System::Drawing::Size(25, 23);
 			   this->c_Status->TabIndex = 1;
@@ -497,13 +499,30 @@ namespace GUITest2 {
 			   this->Status_lb->TabIndex = 0;
 			   this->Status_lb->Text = L"Status:";
 			   // 
+			   // btn_stCollapse
+			   // 
+			   this->btn_stCollapse->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			   this->btn_stCollapse->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
+			   this->btn_stCollapse->FlatAppearance->BorderSize = 0;
+			   this->btn_stCollapse->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->btn_stCollapse->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->btn_stCollapse->ForeColor = System::Drawing::SystemColors::Control;
+			   this->btn_stCollapse->Location = System::Drawing::Point(1260, 0);
+			   this->btn_stCollapse->Name = L"btn_stCollapse";
+			   this->btn_stCollapse->Size = System::Drawing::Size(40, 17);
+			   this->btn_stCollapse->TabIndex = 6;
+			   this->btn_stCollapse->UseVisualStyleBackColor = false;
+			   this->btn_stCollapse->Click += gcnew System::EventHandler(this, &MyForm::btn_stCollapse_Click);
+			   // 
 			   // pn_cn
 			   // 
 			   this->pn_cn->BackColor = System::Drawing::Color::Transparent;
 			   this->pn_cn->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			   this->pn_cn->Controls->Add(this->pn_Home);
-			   this->pn_cn->Controls->Add(this->pn_Formatting);
 			   this->pn_cn->Controls->Add(this->pn_compression);
+			   this->pn_cn->Controls->Add(this->pn_Formatting);
 			   this->pn_cn->Controls->Add(this->pn_Insights);
 			   this->pn_cn->Controls->Add(this->pn_consistency);
 			   this->pn_cn->Dock = System::Windows::Forms::DockStyle::Fill;
@@ -526,10 +545,10 @@ namespace GUITest2 {
 			   this->flowLayoutPanel1->Controls->Add(this->minify_btn);
 			   this->flowLayoutPanel1->Controls->Add(this->compress_btn);
 			   this->flowLayoutPanel1->Controls->Add(this->btn_decompress);
-			   this->flowLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Left;
+			   this->flowLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Top;
 			   this->flowLayoutPanel1->Location = System::Drawing::Point(0, 0);
 			   this->flowLayoutPanel1->Name = L"flowLayoutPanel1";
-			   this->flowLayoutPanel1->Size = System::Drawing::Size(130, 586);
+			   this->flowLayoutPanel1->Size = System::Drawing::Size(1300, 586);
 			   this->flowLayoutPanel1->TabIndex = 1;
 			   // 
 			   // minify_btn
@@ -558,7 +577,7 @@ namespace GUITest2 {
 			   this->compress_btn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold));
 			   this->compress_btn->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
-			   this->compress_btn->Location = System::Drawing::Point(3, 58);
+			   this->compress_btn->Location = System::Drawing::Point(131, 3);
 			   this->compress_btn->Name = L"compress_btn";
 			   this->compress_btn->Size = System::Drawing::Size(122, 49);
 			   this->compress_btn->TabIndex = 0;
@@ -574,12 +593,170 @@ namespace GUITest2 {
 			   this->btn_decompress->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold));
 			   this->btn_decompress->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
 				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
-			   this->btn_decompress->Location = System::Drawing::Point(3, 113);
+			   this->btn_decompress->Location = System::Drawing::Point(259, 3);
 			   this->btn_decompress->Name = L"btn_decompress";
 			   this->btn_decompress->Size = System::Drawing::Size(122, 49);
 			   this->btn_decompress->TabIndex = 2;
 			   this->btn_decompress->Text = L"decompress";
 			   this->btn_decompress->UseVisualStyleBackColor = false;
+			   // 
+			   // pn_Formatting
+			   // 
+			   this->pn_Formatting->Controls->Add(this->panel2);
+			   this->pn_Formatting->Dock = System::Windows::Forms::DockStyle::Fill;
+			   this->pn_Formatting->Location = System::Drawing::Point(0, 0);
+			   this->pn_Formatting->Name = L"pn_Formatting";
+			   this->pn_Formatting->Size = System::Drawing::Size(1300, 586);
+			   this->pn_Formatting->TabIndex = 2;
+			   // 
+			   // panel2
+			   // 
+			   this->panel2->Controls->Add(this->Format_toolStrip);
+			   this->panel2->Controls->Add(this->tb_XML_viewer);
+			   this->panel2->Dock = System::Windows::Forms::DockStyle::Fill;
+			   this->panel2->Location = System::Drawing::Point(0, 0);
+			   this->panel2->Margin = System::Windows::Forms::Padding(50);
+			   this->panel2->Name = L"panel2";
+			   this->panel2->Size = System::Drawing::Size(1300, 586);
+			   this->panel2->TabIndex = 3;
+			   // 
+			   // Format_toolStrip
+			   // 
+			   this->Format_toolStrip->BackColor = System::Drawing::Color::Transparent;
+			   this->Format_toolStrip->GripStyle = System::Windows::Forms::ToolStripGripStyle::Hidden;
+			   this->Format_toolStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
+				   this->Dbtn_Save,
+					   this->toolStripSeparator1, this->Validator, this->Prettifier, this->Corrector, this->btn_restore
+			   });
+			   this->Format_toolStrip->Location = System::Drawing::Point(0, 0);
+			   this->Format_toolStrip->Name = L"Format_toolStrip";
+			   this->Format_toolStrip->RenderMode = System::Windows::Forms::ToolStripRenderMode::Professional;
+			   this->Format_toolStrip->Size = System::Drawing::Size(1300, 53);
+			   this->Format_toolStrip->TabIndex = 5;
+			   this->Format_toolStrip->Text = L"toolStrip1";
+			   // 
+			   // Dbtn_Save
+			   // 
+			   this->Dbtn_Save->AutoSize = false;
+			   this->Dbtn_Save->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			   this->Dbtn_Save->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				   this->saveNewToolStripMenuItem,
+					   this->saveToThisFileToolStripMenuItem
+			   });
+			   this->Dbtn_Save->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"Dbtn_Save.Image")));
+			   this->Dbtn_Save->ImageScaling = System::Windows::Forms::ToolStripItemImageScaling::None;
+			   this->Dbtn_Save->ImageTransparentColor = System::Drawing::Color::Magenta;
+			   this->Dbtn_Save->Name = L"Dbtn_Save";
+			   this->Dbtn_Save->Size = System::Drawing::Size(60, 50);
+			   this->Dbtn_Save->Text = L"Save";
+			   // 
+			   // saveNewToolStripMenuItem
+			   // 
+			   this->saveNewToolStripMenuItem->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(23)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(29)));
+			   this->saveNewToolStripMenuItem->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(252)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(184)));
+			   this->saveNewToolStripMenuItem->Name = L"saveNewToolStripMenuItem";
+			   this->saveNewToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>(((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Shift)
+				   | System::Windows::Forms::Keys::S));
+			   this->saveNewToolStripMenuItem->Size = System::Drawing::Size(195, 22);
+			   this->saveNewToolStripMenuItem->Text = L"Save new";
+			   this->saveNewToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::saveNewToolStripMenuItem_Click);
+			   // 
+			   // saveToThisFileToolStripMenuItem
+			   // 
+			   this->saveToThisFileToolStripMenuItem->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(23)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(29)));
+			   this->saveToThisFileToolStripMenuItem->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(252)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(184)));
+			   this->saveToThisFileToolStripMenuItem->Name = L"saveToThisFileToolStripMenuItem";
+			   this->saveToThisFileToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::S));
+			   this->saveToThisFileToolStripMenuItem->Size = System::Drawing::Size(195, 22);
+			   this->saveToThisFileToolStripMenuItem->Text = L"save to this file";
+			   this->saveToThisFileToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::saveToThisFileToolStripMenuItem_Click);
+			   // 
+			   // toolStripSeparator1
+			   // 
+			   this->toolStripSeparator1->AutoSize = false;
+			   this->toolStripSeparator1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(252)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(184)));
+			   this->toolStripSeparator1->Margin = System::Windows::Forms::Padding(5, 0, 5, 0);
+			   this->toolStripSeparator1->Name = L"toolStripSeparator1";
+			   this->toolStripSeparator1->Size = System::Drawing::Size(2, 35);
+			   // 
+			   // Validator
+			   // 
+			   this->Validator->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			   this->Validator->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"Validator.Image")));
+			   this->Validator->ImageScaling = System::Windows::Forms::ToolStripItemImageScaling::None;
+			   this->Validator->ImageTransparentColor = System::Drawing::Color::Magenta;
+			   this->Validator->Margin = System::Windows::Forms::Padding(5, 1, 5, 2);
+			   this->Validator->Name = L"Validator";
+			   this->Validator->Size = System::Drawing::Size(35, 50);
+			   this->Validator->Text = L"consistency";
+			   this->Validator->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
+			   this->Validator->Click += gcnew System::EventHandler(this, &MyForm::Validator_Click);
+			   // 
+			   // Prettifier
+			   // 
+			   this->Prettifier->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			   this->Prettifier->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
+			   this->Prettifier->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"Prettifier.Image")));
+			   this->Prettifier->ImageScaling = System::Windows::Forms::ToolStripItemImageScaling::None;
+			   this->Prettifier->ImageTransparentColor = System::Drawing::Color::Magenta;
+			   this->Prettifier->Margin = System::Windows::Forms::Padding(5, 1, 5, 2);
+			   this->Prettifier->Name = L"Prettifier";
+			   this->Prettifier->Size = System::Drawing::Size(34, 50);
+			   this->Prettifier->Text = L"Prettify";
+			   this->Prettifier->Click += gcnew System::EventHandler(this, &MyForm::Prettifier_Click);
+			   // 
+			   // Corrector
+			   // 
+			   this->Corrector->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			   this->Corrector->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"Corrector.Image")));
+			   this->Corrector->ImageScaling = System::Windows::Forms::ToolStripItemImageScaling::None;
+			   this->Corrector->ImageTransparentColor = System::Drawing::Color::Magenta;
+			   this->Corrector->Margin = System::Windows::Forms::Padding(5, 1, 5, 2);
+			   this->Corrector->Name = L"Corrector";
+			   this->Corrector->Size = System::Drawing::Size(35, 50);
+			   this->Corrector->Text = L"Fix";
+			   this->Corrector->Click += gcnew System::EventHandler(this, &MyForm::Corrector_Click);
+			   // 
+			   // btn_restore
+			   // 
+			   this->btn_restore->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			   this->btn_restore->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btn_restore.Image")));
+			   this->btn_restore->ImageScaling = System::Windows::Forms::ToolStripItemImageScaling::None;
+			   this->btn_restore->ImageTransparentColor = System::Drawing::Color::Magenta;
+			   this->btn_restore->Margin = System::Windows::Forms::Padding(5, 1, 5, 2);
+			   this->btn_restore->Name = L"btn_restore";
+			   this->btn_restore->Size = System::Drawing::Size(35, 50);
+			   this->btn_restore->Text = L"Restore";
+			   this->btn_restore->Click += gcnew System::EventHandler(this, &MyForm::btn_restore_Click);
+			   // 
+			   // tb_XML_viewer
+			   // 
+			   this->tb_XML_viewer->AcceptsTab = true;
+			   this->tb_XML_viewer->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				   | System::Windows::Forms::AnchorStyles::Left)
+				   | System::Windows::Forms::AnchorStyles::Right));
+			   this->tb_XML_viewer->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(23)), static_cast<System::Int32>(static_cast<System::Byte>(24)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(29)));
+			   this->tb_XML_viewer->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			   this->tb_XML_viewer->Font = (gcnew System::Drawing::Font(L"Corbel Light", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				   static_cast<System::Byte>(0)));
+			   this->tb_XML_viewer->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(252)), static_cast<System::Int32>(static_cast<System::Byte>(217)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(184)));
+			   this->tb_XML_viewer->Location = System::Drawing::Point(53, 103);
+			   this->tb_XML_viewer->Margin = System::Windows::Forms::Padding(50);
+			   this->tb_XML_viewer->Multiline = true;
+			   this->tb_XML_viewer->Name = L"tb_XML_viewer";
+			   this->tb_XML_viewer->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
+			   this->tb_XML_viewer->Size = System::Drawing::Size(1200, 430);
+			   this->tb_XML_viewer->TabIndex = 4;
+			   this->tb_XML_viewer->Text = L"Select an operation";
+			   this->tb_XML_viewer->TextChanged += gcnew System::EventHandler(this, &MyForm::tb_XML_viewer_TextChanged);
 			   // 
 			   // pn_Home
 			   // 
@@ -717,164 +894,6 @@ namespace GUITest2 {
 			   this->lbl_FileName->Text = L"No File is Selected";
 			   this->lbl_FileName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			   // 
-			   // pn_Formatting
-			   // 
-			   this->pn_Formatting->Controls->Add(this->panel2);
-			   this->pn_Formatting->Dock = System::Windows::Forms::DockStyle::Fill;
-			   this->pn_Formatting->Location = System::Drawing::Point(0, 0);
-			   this->pn_Formatting->Name = L"pn_Formatting";
-			   this->pn_Formatting->Size = System::Drawing::Size(1300, 586);
-			   this->pn_Formatting->TabIndex = 2;
-			   // 
-			   // panel2
-			   // 
-			   this->panel2->Controls->Add(this->Format_toolStrip);
-			   this->panel2->Controls->Add(this->tb_XML_viewer);
-			   this->panel2->Dock = System::Windows::Forms::DockStyle::Fill;
-			   this->panel2->Location = System::Drawing::Point(0, 0);
-			   this->panel2->Margin = System::Windows::Forms::Padding(50);
-			   this->panel2->Name = L"panel2";
-			   this->panel2->Size = System::Drawing::Size(1300, 586);
-			   this->panel2->TabIndex = 3;
-			   // 
-			   // Format_toolStrip
-			   // 
-			   this->Format_toolStrip->BackColor = System::Drawing::Color::Transparent;
-			   this->Format_toolStrip->GripStyle = System::Windows::Forms::ToolStripGripStyle::Hidden;
-			   this->Format_toolStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
-				   this->Dbtn_Save,
-					   this->toolStripSeparator1, this->Validator, this->Prettifier, this->Corrector, this->btn_restore
-			   });
-			   this->Format_toolStrip->Location = System::Drawing::Point(0, 0);
-			   this->Format_toolStrip->Name = L"Format_toolStrip";
-			   this->Format_toolStrip->RenderMode = System::Windows::Forms::ToolStripRenderMode::Professional;
-			   this->Format_toolStrip->Size = System::Drawing::Size(1300, 53);
-			   this->Format_toolStrip->TabIndex = 5;
-			   this->Format_toolStrip->Text = L"toolStrip1";
-			   // 
-			   // Dbtn_Save
-			   // 
-			   this->Dbtn_Save->AutoSize = false;
-			   this->Dbtn_Save->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			   this->Dbtn_Save->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				   this->saveNewToolStripMenuItem,
-					   this->saveToThisFileToolStripMenuItem
-			   });
-			   this->Dbtn_Save->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"Dbtn_Save.Image")));
-			   this->Dbtn_Save->ImageScaling = System::Windows::Forms::ToolStripItemImageScaling::None;
-			   this->Dbtn_Save->ImageTransparentColor = System::Drawing::Color::Magenta;
-			   this->Dbtn_Save->Name = L"Dbtn_Save";
-			   this->Dbtn_Save->Size = System::Drawing::Size(60, 50);
-			   this->Dbtn_Save->Text = L"Save";
-			   // 
-			   // saveNewToolStripMenuItem
-			   // 
-			   this->saveNewToolStripMenuItem->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(23)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(29)));
-			   this->saveNewToolStripMenuItem->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(252)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(184)));
-			   this->saveNewToolStripMenuItem->Name = L"saveNewToolStripMenuItem";
-			   this->saveNewToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>(((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Shift)
-				   | System::Windows::Forms::Keys::S));
-			   this->saveNewToolStripMenuItem->Size = System::Drawing::Size(195, 22);
-			   this->saveNewToolStripMenuItem->Text = L"Save new";
-			   this->saveNewToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::saveNewToolStripMenuItem_Click);
-			   // 
-			   // saveToThisFileToolStripMenuItem
-			   // 
-			   this->saveToThisFileToolStripMenuItem->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(23)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(24)), static_cast<System::Int32>(static_cast<System::Byte>(29)));
-			   this->saveToThisFileToolStripMenuItem->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(252)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(184)));
-			   this->saveToThisFileToolStripMenuItem->Name = L"saveToThisFileToolStripMenuItem";
-			   this->saveToThisFileToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::S));
-			   this->saveToThisFileToolStripMenuItem->Size = System::Drawing::Size(195, 22);
-			   this->saveToThisFileToolStripMenuItem->Text = L"save to this file";
-			   this->saveToThisFileToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::saveToThisFileToolStripMenuItem_Click);
-			   // 
-			   // toolStripSeparator1
-			   // 
-			   this->toolStripSeparator1->AutoSize = false;
-			   this->toolStripSeparator1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(252)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(217)), static_cast<System::Int32>(static_cast<System::Byte>(184)));
-			   this->toolStripSeparator1->Margin = System::Windows::Forms::Padding(5, 0, 5, 0);
-			   this->toolStripSeparator1->Name = L"toolStripSeparator1";
-			   this->toolStripSeparator1->Size = System::Drawing::Size(2, 35);
-			   // 
-			   // Validator
-			   // 
-			   this->Validator->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			   this->Validator->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"Validator.Image")));
-			   this->Validator->ImageScaling = System::Windows::Forms::ToolStripItemImageScaling::None;
-			   this->Validator->ImageTransparentColor = System::Drawing::Color::Magenta;
-			   this->Validator->Margin = System::Windows::Forms::Padding(5, 1, 5, 2);
-			   this->Validator->Name = L"Validator";
-			   this->Validator->Size = System::Drawing::Size(35, 50);
-			   this->Validator->Text = L"Validate";
-			   this->Validator->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
-			   this->Validator->Click += gcnew System::EventHandler(this, &MyForm::Validator_Click);
-			   // 
-			   // Prettifier
-			   // 
-			   this->Prettifier->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			   this->Prettifier->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
-			   this->Prettifier->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"Prettifier.Image")));
-			   this->Prettifier->ImageScaling = System::Windows::Forms::ToolStripItemImageScaling::None;
-			   this->Prettifier->ImageTransparentColor = System::Drawing::Color::Magenta;
-			   this->Prettifier->Margin = System::Windows::Forms::Padding(5, 1, 5, 2);
-			   this->Prettifier->Name = L"Prettifier";
-			   this->Prettifier->Size = System::Drawing::Size(34, 50);
-			   this->Prettifier->Text = L"Prettify";
-			   this->Prettifier->Click += gcnew System::EventHandler(this, &MyForm::Prettifier_Click);
-			   // 
-			   // Corrector
-			   // 
-			   this->Corrector->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			   this->Corrector->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"Corrector.Image")));
-			   this->Corrector->ImageScaling = System::Windows::Forms::ToolStripItemImageScaling::None;
-			   this->Corrector->ImageTransparentColor = System::Drawing::Color::Magenta;
-			   this->Corrector->Margin = System::Windows::Forms::Padding(5, 1, 5, 2);
-			   this->Corrector->Name = L"Corrector";
-			   this->Corrector->Size = System::Drawing::Size(35, 50);
-			   this->Corrector->Text = L"Fix";
-			   this->Corrector->Click += gcnew System::EventHandler(this, &MyForm::Corrector_Click);
-			   // 
-			   // btn_restore
-			   // 
-			   this->btn_restore->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			   this->btn_restore->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btn_restore.Image")));
-			   this->btn_restore->ImageScaling = System::Windows::Forms::ToolStripItemImageScaling::None;
-			   this->btn_restore->ImageTransparentColor = System::Drawing::Color::Magenta;
-			   this->btn_restore->Margin = System::Windows::Forms::Padding(5, 1, 5, 2);
-			   this->btn_restore->Name = L"btn_restore";
-			   this->btn_restore->Size = System::Drawing::Size(35, 50);
-			   this->btn_restore->Text = L"Restore";
-			   this->btn_restore->Click += gcnew System::EventHandler(this, &MyForm::btn_restore_Click);
-			   // 
-			   // tb_XML_viewer
-			   // 
-			   this->tb_XML_viewer->AcceptsTab = true;
-			   this->tb_XML_viewer->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				   | System::Windows::Forms::AnchorStyles::Left)
-				   | System::Windows::Forms::AnchorStyles::Right));
-			   this->tb_XML_viewer->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(23)), static_cast<System::Int32>(static_cast<System::Byte>(24)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(29)));
-			   this->tb_XML_viewer->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			   this->tb_XML_viewer->Font = (gcnew System::Drawing::Font(L"Corbel Light", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				   static_cast<System::Byte>(0)));
-			   this->tb_XML_viewer->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(252)), static_cast<System::Int32>(static_cast<System::Byte>(217)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(184)));
-			   this->tb_XML_viewer->Location = System::Drawing::Point(53, 103);
-			   this->tb_XML_viewer->Margin = System::Windows::Forms::Padding(50);
-			   this->tb_XML_viewer->Multiline = true;
-			   this->tb_XML_viewer->Name = L"tb_XML_viewer";
-			   this->tb_XML_viewer->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-			   this->tb_XML_viewer->Size = System::Drawing::Size(1200, 430);
-			   this->tb_XML_viewer->TabIndex = 4;
-			   this->tb_XML_viewer->Text = L"Select an operation";
-			   this->tb_XML_viewer->TextChanged += gcnew System::EventHandler(this, &MyForm::tb_XML_viewer_TextChanged);
-			   // 
 			   // pn_Insights
 			   // 
 			   this->pn_Insights->Dock = System::Windows::Forms::DockStyle::Fill;
@@ -922,6 +941,11 @@ namespace GUITest2 {
 			   this->pn_cn->ResumeLayout(false);
 			   this->pn_compression->ResumeLayout(false);
 			   this->flowLayoutPanel1->ResumeLayout(false);
+			   this->pn_Formatting->ResumeLayout(false);
+			   this->panel2->ResumeLayout(false);
+			   this->panel2->PerformLayout();
+			   this->Format_toolStrip->ResumeLayout(false);
+			   this->Format_toolStrip->PerformLayout();
 			   this->pn_Home->ResumeLayout(false);
 			   this->flowLayoutPanel2->ResumeLayout(false);
 			   this->flowLayoutPanel2->PerformLayout();
@@ -929,11 +953,6 @@ namespace GUITest2 {
 			   this->cn_FileMenu->Panel2->ResumeLayout(false);
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->cn_FileMenu))->EndInit();
 			   this->cn_FileMenu->ResumeLayout(false);
-			   this->pn_Formatting->ResumeLayout(false);
-			   this->panel2->ResumeLayout(false);
-			   this->panel2->PerformLayout();
-			   this->Format_toolStrip->ResumeLayout(false);
-			   this->Format_toolStrip->PerformLayout();
 			   this->ResumeLayout(false);
 
 		   }
@@ -1052,24 +1071,28 @@ namespace GUITest2 {
 				static_cast<System::Int32>(static_cast<System::Byte>(69)));
 			this->btn_Home->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(23)), static_cast<System::Int32>(static_cast<System::Byte>(24)),
 				static_cast<System::Int32>(static_cast<System::Byte>(29)));
+			pn_sb->Height = 102;
 			break;
 		case 2:
 			this->btn_Compression->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
 				static_cast<System::Int32>(static_cast<System::Byte>(69)));
 			this->btn_Compression->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(23)), static_cast<System::Int32>(static_cast<System::Byte>(24)),
 				static_cast<System::Int32>(static_cast<System::Byte>(29)));
+			pn_sb->Height = 400;
 			break;
 		case 3:
 			this->btn_Insights->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
 				static_cast<System::Int32>(static_cast<System::Byte>(69)));
 			this->btn_Insights->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(23)), static_cast<System::Int32>(static_cast<System::Byte>(24)),
 				static_cast<System::Int32>(static_cast<System::Byte>(29)));
+			pn_sb->Height = 102;
 			break;
 		case 4:
 			this->btn_Format->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
 				static_cast<System::Int32>(static_cast<System::Byte>(69)));
 			this->btn_Format->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(23)), static_cast<System::Int32>(static_cast<System::Byte>(24)),
 				static_cast<System::Int32>(static_cast<System::Byte>(29)));
+			pn_sb->Height = 102;
 			break;
 
 		}
@@ -1244,6 +1267,25 @@ namespace GUITest2 {
 	private: System::Void Corrector_Click(System::Object^ sender, System::EventArgs^ e) {
 	
 	}
+
+	private: System::Void Validator_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*
+		string str = Adapter::to_unmanaged(tb_XML_viewer->Text);
+		//string test1 = "<users>\n<user> 1 </id> <name> heba ayman <posts><post>ff </body><topics>\n<topic>\neconom\n</topic\n<topic>\neconomy\n</topic>\n</posts>\n<followers>\n<follower>\n2\n</id>\n</follower>\n</followers>\n</user>\n</users>";
+		vector <string> test = Consistency(str);
+		int g = 0;
+		c_Status->Text = "";
+		pn_sb->Height = 400;
+		while (g < test.size()) {
+			c_Status->Text += Adapter::to_managed(test[g]);
+			g++;
+
+
+		}
+		*/
+
+	}
+
 			//------------------------
 			//	compress window
 			//------------------------
@@ -1259,6 +1301,21 @@ namespace GUITest2 {
 		c_Status->Text = "minifying complete";
 		unsavedChanges = false;
 	}
+
+		   //------------------------------------
+		   //	||							||
+		   //	||		Status bar			||
+		   //	||							||
+		   //------------------------------------
+
+	private: System::Void btn_stCollapse_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (pn_sb->Height == 102) {
+			pn_sb->Height = 400;
+		}
+		else {
+			pn_sb->Height = 102;
+		}
+	}
 		   //------------------------------------
 		   //	||							||
 		   //	||	other useful functions	||
@@ -1266,29 +1323,26 @@ namespace GUITest2 {
 		   //------------------------------------
 
 				   //create file
-		   bool createNewFile() {
-			   createFileForm^ extraComp = gcnew createFileForm();
-			   System::Windows::Forms::DialogResult dr = extraComp->ShowDialog(this);
-			   if (dr == System::Windows::Forms::DialogResult::Cancel)
-			   {
-				   extraComp->Close();
-				   return 0;
-			   }
-			   else if (dr == System::Windows::Forms::DialogResult::OK)
-			   {
-				   setFile(extraComp->getfilePath());
-				   extraComp->Close();
-				   return 1;
-			   }
-		   }
-		   // N/N
-	private: System::Void Validator_Click(System::Object^ sender, System::EventArgs^ e) {
+	bool createNewFile() {
+		createFileForm^ extraComp = gcnew createFileForm();
+		System::Windows::Forms::DialogResult dr = extraComp->ShowDialog(this);
+		if (dr == System::Windows::Forms::DialogResult::Cancel)
+		{
+			extraComp->Close();
+			return 0;
+		}
+		else if (dr == System::Windows::Forms::DialogResult::OK)
+		{
+			setFile(extraComp->getfilePath());
+			extraComp->Close();
+			return 1;
+		}
 	}
+		   // N/N
+
 		   //show original XML File
 	void ViewFileXml() {
 		if (file == nullptr) {
-			//tb_XML_viewer->Text = "Error: no file is selected\r\nSelect a file first to proceed";
-			//c_Status->Text = "loading Unuccessful";
 			c_Status->Text = "Error: no file is selected. Select a file first to proceed";
 		}
 		else {
@@ -1312,6 +1366,7 @@ namespace GUITest2 {
 		this->file = new File(Adapter::to_unmanaged(fileName));
 		lbl_FileName->Text = fileName;
 	}
+
 
 
 

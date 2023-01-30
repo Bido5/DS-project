@@ -124,17 +124,28 @@
     <ClCompile Include="Adapter.cpp" />
     <ClCompile Include="createFileForm.cpp" />
     <ClCompile Include="File.cpp" />
+    <ClCompile Include="formatter.cpp" />
+    <ClCompile Include="HashMap.cpp" />
     <ClCompile Include="MyForm.cpp" />
+    <ClCompile Include="MyForm1.cpp" />
+    <ClCompile Include="operations.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Adapter.h" />
     <ClInclude Include="createFileForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="customRenderer.h" />
     <ClInclude Include="File.h" />
+    <ClInclude Include="formatter.h" />
+    <ClInclude Include="HashMap.h" />
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="MyForm1.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="operations.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="createFileForm.resx">
@@ -142,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyForm1.resx">
+      <DependentUpon>MyForm1.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
