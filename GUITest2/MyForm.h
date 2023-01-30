@@ -1245,6 +1245,7 @@ namespace GUITest2 {
 
 	//prettify
 	private: System::Void Prettifier_Click(System::Object^ sender, System::EventArgs^ e) {
+		/*
 		if (file == nullptr) {
 
 			c_Status->Text = "Error: no file is selected. Select a file first to proceed";
@@ -1261,7 +1262,12 @@ namespace GUITest2 {
 
 			c_Status->Text = "successfully formatted";
 		}
-		
+		*/
+
+		string minified = minify(Adapter::to_unmanaged(tb_XML_viewer->Text));
+		format_xml(&minified);
+		tb_XML_viewer->Text = Adapter::to_managed(minified);
+
 	}
 
 	private: System::Void Corrector_Click(System::Object^ sender, System::EventArgs^ e) {
