@@ -11,11 +11,11 @@ string minify(vector<string> text)
     return test;
     */
 
-    for (int i = 0; i < text.size(); i++) {
+    for (int i = 0; i < text.size(); i++)
+    {
         minified += text[i];
     }
     return minified;
-
 }
 /*
  * compress: iterate thro the string
@@ -25,7 +25,7 @@ string minify(vector<string> text)
  *
  *
  * */
-/*
+
 vector<int> compress(string text, HashMaphash)
 {
     vector<int> result = {};
@@ -50,14 +50,14 @@ vector<int> compress(string text, HashMaphash)
     cout << "compression size: " << result.size() << endl;
     return result;
 }
-*/
+
 // hash->printHash();
 // for (int i = 0; i < result.size(); ++i) {
 //   if(result[i] != 0){
 //     cout<< i << ": "<<result[i]<< " " << endl;
 // }
 // }
-string decompress(vector<int> compressed, HashMap* hash)
+string decompress(vector<int> compressed, HashMap *hash)
 {
     string xml = "";
     for (int i = 0; i < compressed.size(); i++)
