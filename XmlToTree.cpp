@@ -47,6 +47,14 @@ void Node::buildTree(vector<string> xml)
         }
     }
 }
+
+
+bool checkBody(string body,string word){
+    if(body.find(word) != string::npos)  //to see if it is found in the body
+        return true;
+    else
+        return false;
+}
 string bodyText;
 void Node::searchForTopic(Node *root, string topic)
 {
@@ -62,28 +70,37 @@ void Node::searchForTopic(Node *root, string topic)
         if (root->data == "<body>")
         {
             bodyText = root->children[0]->data;
+            if( checkBody(bodyText,topic) ) //found the word in the body
+            {
+                foundTopic = true;
+
+            }
+
         }
         if (root->data == "<topic>")
         {
 
             string currentTopic;
-            currentTopic = (root->children[0]->data);
-            if (currentTopic.compare(topic) == 0)
+                currentTopic = (root->children[0]->data);
+                if (currentTopic.compare(topic) == 0)
+                {
+                    foundTopic = true;
+                }
+
+        }
+            if (foundTopic == true)
             {
-                foundTopic = true;
+                postsList.push_back(bodyText);
+                foundTopic = false;
+
             }
-        }
-        if (foundTopic == true)
-        {
-            postsList.push_back(bodyText);
-            foundTopic = false;
-        }
 
         searchForTopic(root->children[i], topic);
+
+
     }
 }
 
-vector<string> Node::getPosts()
-{
+vector<string> Node::getPosts(){
     return postsList;
 }
