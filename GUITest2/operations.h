@@ -14,8 +14,10 @@
 
 
 using namespace std;
-string minify(vector<string> text);
+string minify(string text);
+string minify(vector <string> text);
 //vector<int> compress(string text, HashMaphash);
 string decompress(vector<int> compressed, HashMap* hash);
+vector <string> to_array(string xml);
 //vector <string> Consistency(string input_stream);
 #endif // DS_PROJECT_OPERATIONS_H
