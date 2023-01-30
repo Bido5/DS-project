@@ -1,5 +1,6 @@
   GUITest2.createFileForm.resources - Embedded, ContainedInManifestFile, 
   GUITest2.MyForm.resources - Embedded, ContainedInManifestFile, 
+  GUITest2.MyForm1.resources - Embedded, ContainedInManifestFile, 
 ImageRuntimeVersion: v4.0.30319
 Assembly GUITest2, Version=0.0.*, Culture=Invariant Language (Invariant Country): 
 	hash=SHA1, flags=PublicKey
@@ -20,6 +21,10 @@ Class GUITest2.createFileForm: AutoLayout, AnsiClass, Class, Public, BeforeField
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Methods:
     getfilePath(): PrivateScope, Public, HideBySig
+Class GUITest2.MyForm1: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(System.String, System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class GUITest2.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
