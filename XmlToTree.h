@@ -31,7 +31,7 @@ public:
     }
 
     void buildTree(vector<string> xml);
-    void searchByTopic(Node *root, string topic);
-    void searchByWord(Node *root, string word);
+    void searchForTopic(Node *root, string topic);
+
     vector<string> getChildren(Node *node);
 };

@@ -47,52 +47,11 @@ void Node::buildTree(vector<string> xml)
         }
     }
 }
-string bodyTextTopic;
-void Node::searchByTopic(Node *root, string topic)
+string bodyText;
+void Node::searchForTopic(Node *root, string topic)
 {
     bool foundTopic = false;
     // leaf case
-    if (root == NULL)
-    {
-        return;
-    }
-    for (int i = 0; i < root->children.size(); i++)
-    {
-
-        if (root->data == "<body>")
-        {
-            bodyTextTopic = root->children[0]->data;
-        }
-        if (root->data == "<topic>")
-        {
-            cout << endl
-                 << root->children[0]->data << " vs " << topic << endl;
-            string currentTopic;
-            currentTopic = (root->children[0]->data);
-            cout << "comparison" << currentTopic.compare(topic) << endl;
-            if (currentTopic.compare(topic) == 0)
-            {
-                cout << "innnn";
-                // cout<<"found it"<<endl;
-                foundTopic = true;
-            }
-            if (foundTopic == true)
-            {
-                postsList.push_back(bodyTextTopic);
-                cout << "*****" << bodyTextTopic << endl;
-                foundTopic = false;
-            }
-        }
-
-        if (root->children[0]->children != NULL)
-        {
-            searchByTopic(root->children[i], topic);
-        }
-    }
-}
-string bodyText;
-void Node::searchByWord(Node *root, string word)
-{
     if (root == NULL)
     {
         return;
@@ -103,12 +62,28 @@ void Node::searchByWord(Node *root, string word)
         if (root->data == "<body>")
         {
             bodyText = root->children[0]->data;
-            if (bodyText.find(word) != string::npos) // to see if it is found in the body
+        }
+        if (root->data == "<topic>")
+        {
+
+            string currentTopic;
+            currentTopic = (root->children[0]->data);
+            if (currentTopic.compare(topic) == 0)
             {
-                cout << "found !!!!!!!!!!!";
+                foundTopic = true;
             }
         }
+        if (foundTopic == true)
+        {
+            postsList.push_back(bodyText);
+            foundTopic = false;
+        }
 
-        searchByWord(root->children[i], word);
+        searchForTopic(root->children[i], topic);
     }
+}
+
+vector<string> Node::getPosts()
+{
+    return postsList;
 }
