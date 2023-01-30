@@ -1,6 +1,43 @@
 #include "operations.h"
 #include "File.h"
 
+
+vector <string> to_array(string xml) {
+    vector <string> out;
+
+    for (int i = 0; i < xml.size(); i++) {
+        string element;
+        switch (xml[i]) {
+        case '<':
+            while (i < xml.size()) {
+                element.push_back(xml[i]);
+                if (xml[i] == '>')
+                    break;
+                i++;
+            }
+            out.push_back(element);
+            break;
+        case ' ':
+        case '\t':
+        case '\r':
+        case '\n':
+            continue;
+            break;
+        default:
+            while (i < xml.size() && xml[i] < 127 && xml[i]>31) {
+                if (xml[i] == '<') {
+                    i--;
+                    break;
+                }
+                element.push_back(xml[i++]);
+            }
+            out.push_back(element);
+        }
+    }
+
+    return out;
+}
+
 string minify(vector<string> text)
 {
     string minified = "";
@@ -17,6 +54,20 @@ string minify(vector<string> text)
     return minified;
 
 }
+
+string minify(string text)
+{
+    string minified = "";
+    vector<string> elemnets = to_array(text);
+
+    for (int i = 0; i < text.size(); i++) {
+        minified += text[i];
+    }
+    return minified;
+
+}
+
+
 /*
  * compress: iterate thro the string
  * single characters a-z insert 3ady
