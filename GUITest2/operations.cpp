@@ -1,4 +1,5 @@
 #include "operations.h"
+#include "Adapter.h"
 
 
 
@@ -155,159 +156,88 @@ string XmlOp::decompress(vector<int> compressed, HashMap* hash)
     return xml;
 }
 
-//vector <string> Consistency(string input_stream) {
-//    int end_subStr = 0;
-//    stack<pair<string, int>> st;
-//    int line = 1;
-//    string tag;
-//    string close_tag;
-//    bool flag_error;
-//    stack<pair<string, int>> error_stack;
-//    vector <int > output;
-//    vector <string>  Errors;
-//    istringstream iss(input_stream);
-//    string str;
-//
-//    while (getline(iss, str)) {
-//
-//        int start_subStr = str.find('<', end_subStr);
-//        end_subStr = Math.abs(str.find('>', end_subStr + 1));
-//        tag = str.substr(start_subStr + 1, abs(end_subStr - start_subStr - 1));
-//        flag_error = (tag.find('<') != string::npos || tag.find('>') != string::npos || end_subStr == -1);
-//
-//        /*checking if any of token is missed*/
-//        if ((start_subStr == -1 && end_subStr != -1) || (start_subStr != -1 && end_subStr == -1)) {
-//            // cout << "Missing token in line: " << line << endl;
-//            Errors.push_back("Missing token in line: " + to_string(line) + "\n");
-//            start_subStr = 0, end_subStr = 0;
-//            line++;
-//            continue;
-//        }
-//
-//        if ((str[abs(start_subStr)]) == '<' && str[start_subStr + 1] != '/') {
-//            if (!flag_error)
-//                st.push({ (tag), (line) });
-//            else if ((flag_error && tag.find('<') != string::npos) && end_subStr != -1 &&
-//                tag[tag.find('<') + 1] != '/') {
-//                st.push({ tag.substr(tag.find('<') + 1, end_subStr - start_subStr - 1), (line) });
-//                // cout << "Missing token in line: " << line << endl;
-//                Errors.push_back("Missing token in line: " + to_string(line) + "\n");
-//
-//            }
-//            else {
-//                //  cout << "Missing token in line: " << line << endl;
-//                Errors.push_back("Missing token in line: " + to_string(line) + "\n");
-//            }
-//        }
-//        if ((str[abs(start_subStr)]) == '<' && str[start_subStr + 1] == '/') {
-//
-//            close_tag = str.substr(start_subStr + 2, abs(end_subStr - start_subStr - 2));
-//
-//            if (!st.empty()) {
-//
-//                if ((st.top().first != close_tag)) {
-//                    while (!st.empty())
-//                    {
-//                        if ((st.top().first != close_tag)) {
-//                            error_stack.push(st.top());
-//                            st.pop();
-//                        }
-//                        else
-//                            break;
-//
-//                    }
-//                    if (st.empty())
-//                    {
-//                        Errors.push_back("Missing opening tag for -> " + close_tag + " in line :" + to_string(line) + "\n");
-//                        while (!error_stack.empty()) {
-//                            st.push(error_stack.top());
-//                            error_stack.pop();
-//                        }
-//                    }
-//                }
-//
-//                if ((st.top().first == close_tag)) {
-//                    st.pop();
-//                }
-//            }
-//        }
-//
-//        while (start_subStr > 0 && end_subStr > 0) {
-//            start_subStr = str.find('<', end_subStr);
-//            end_subStr = str.find('>', end_subStr + 1);
-//
-//            tag = str.substr(start_subStr + 1, abs(end_subStr - start_subStr - 1));
-//            flag_error = (tag.find('<') != string::npos || tag.find('>') != string::npos || end_subStr == -1);
-//
-//            if ((start_subStr == -1 && end_subStr != -1) || (start_subStr != -1 && end_subStr == -1)) {
-//                Errors.push_back("Missing token in line: " + to_string(line) + "\n");
-//                start_subStr = 0, end_subStr = 0;
-//                line++;
-//                continue;
-//
-//            }
-//
-//            if ((str[abs(start_subStr)]) == '<' && str[start_subStr + 1] != '/') {
-//                if (!flag_error)
-//                    st.push({ (tag), (line) });
-//                else if ((flag_error && tag.find('<') != string::npos) && end_subStr != -1 &&
-//                    tag[tag.find('<') + 1] != '/') {
-//                    st.push({ tag.substr(tag.find('<') + 1, end_subStr - start_subStr - 1), (line) });
-//                    //cout << "Missing token in line: " << line << endl;
-//                    Errors.push_back("Missing token in line: " + to_string(line) + "\n");
-//
-//
-//                }
-//                else {
-//                    //cout << "Missing token in line: " << line << endl;
-//                    Errors.push_back("Missing token in line: " + to_string(line) + "\n");
-//                }
-//            }
-//            if ((str[abs(start_subStr)]) == '<' && str[start_subStr + 1] == '/') {
-//
-//                close_tag = str.substr(start_subStr + 2, abs(end_subStr - start_subStr - 2));
-//
-//                if (!st.empty()) {
-//
-//                    if ((st.top().first != close_tag)) {
-//                        while (!st.empty())
-//                        {
-//                            if ((st.top().first != close_tag)) {
-//                                error_stack.push(st.top());
-//                                st.pop();
-//                            }
-//                            else
-//                                break;
-//                        }
-//                        if (st.empty())
-//                        {
-//                            Errors.push_back("Missing opening tag for -> " + close_tag + " in line :" + to_string(line) + "\n");
-//                            while (!error_stack.empty()) {
-//                                st.push(error_stack.top());
-//                                error_stack.pop();
-//                            }
-//                        }
-//                    }
-//
-//                    if ((st.top().first == close_tag)) {
-//                        st.pop();
-//                    }
-//                }
-//            }
-//        }
-//        start_subStr = 0, end_subStr = 0;
-//        line++;
-//    }
-//
-//    while (!error_stack.empty()) {
-//
-//        Errors.push_back("Missing closing tag -> " + error_stack.top().first + " in line: " + to_string(error_stack.top().second) + "\n");
-//        error_stack.pop();
-//    }
-//
-//    return Errors;
-//
-//}
+vector <pair<string, int>> XmlOp::Consistency(string input) {
+    stack <pair<string, int>> tags;
+    vector <pair<string, int>> errors;
+    vector <string> elements = XmlOp::to_array(input);
+
+    for (int i = 0; i <elements.size(); i++) {
+        if (elements[i][0] == '<') {
+            if (elements[i][1] == '/') {
+                /*
+                auto top = tags.top();
+                string tagName = top.first.substr(1, top.first.size() - 2);
+                if (tagName != elements[i].substr(2, elements[i].size() - 3))
+                    errors.push_back(pair<string, int>(elements[i], i+1));
+                else
+                    tags.pop();
+                */
+                stack <pair<string, int>> fErrors = tagExists(tags, elements[i].substr(2, elements[i].size() - 3), i + 1);
+                while (!fErrors.empty()) {
+                    errors.push_back(fErrors.top());
+                    fErrors.pop();
+                }
+            }
+            else
+                tags.push(pair<string, int>(elements[i], i + 1));
+        }
+        else
+            continue;
+    }
+    while (!tags.empty()) { 
+        errors.push_back(tags.top());
+        tags.pop();
+    }
+
+    return errors;
+}
+
+stack < pair < string,int>> XmlOp::tagExists(stack <pair<string, int>>& tags, string cmp,int line) {
+    bool found = false;
+    stack <pair<string, int>> errors;
+    while (!tags.empty()) {
+        auto top = tags.top();
+        string tagName = top.first.substr(1, top.first.size() - 2);
+        if (tagName != cmp) {
+            errors.push(tags.top());
+            tags.pop();
+        }
+        else {
+            found = true;
+            tags.pop();
+            break;
+        }
+    }
+
+    if (!found) {
+        while (!errors.empty()) {
+            tags.push(errors.top());
+            errors.pop();
+        }
+        errors.push(pair<string, int>("</" + cmp + ">", line));
+    }
+
+    return errors;
+}
+
+
+string XmlOp::printErrors(string input) {
+    vector <pair<string, int>> errors = Consistency(input);
+    string out = "";
+
+    for (auto it : errors) {
+        if (it.first[1] == '/')
+            out += "Missing opening tag for: ";
+        else
+            out += "Missing closing tag for: ";
+
+        out = out + it.first + " in line(";
+        string line = Adapter::to_unmanaged(it.second.ToString());
+        out = out + line + ")\r\n";
+    }
+    return out;
+}
+
 /*
 string process_string(const string& input) {
     istringstream iss(input);
@@ -365,4 +295,34 @@ string XmlOp::format_xml(string file)
         }
     }
     return s;
+}
+
+string XmlOp::correct(vector <pair<string, int>> errors, string s) {
+    //stack<string> sElements;
+    string out = "";
+    vector <string> elements = to_array(s);
+    map <int, string> errorl;
+    for (auto i : errors) 
+        errorl[i.second] = i.first;
+    
+    int j = 0;
+
+
+    for (int i = 0; i<elements.size(); i++) {
+        if (errorl[i + 1] == "") 
+            out += elements[i];
+        else {
+            if (errorl[i + 1][1] == '/') {
+                out += "<" + elements[i].substr(2, elements.size() - 2);
+                out += elements[i];
+            }
+            else {
+                out += elements[i];
+                out += "</" + elements[i].substr(1, elements.size() - 1);
+            }
+        }
+            
+    }
+    return out;
+
 }
