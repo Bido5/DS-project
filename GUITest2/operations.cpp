@@ -1,8 +1,8 @@
 #include "operations.h"
-#include "File.h"
 
 
-vector <string> to_array(string xml) {
+
+vector <string> XmlOp::to_array(string xml) {
     vector <string> out;
 
     for (int i = 0; i < xml.size(); i++) {
@@ -38,7 +38,44 @@ vector <string> to_array(string xml) {
     return out;
 }
 
-string minify(vector<string> text)
+queue <string> XmlOp::to_queue(string xml) {
+    queue <string> out;
+
+    for (int i = 0; i < xml.size(); i++) {
+        string element = "";
+        switch (xml[i]) {
+        case '<':
+            while (i < xml.size()) {
+                element += xml[i];
+                if (xml[i] == '>')
+                    break;
+                i++;
+            }
+            out.push(element);
+            break;
+        case ' ':
+        case '\t':
+        case '\r':
+        case '\n':
+            continue;
+            break;
+        default:
+            while (i < xml.size() && xml[i] < 127 && xml[i]>31) {
+                if (xml[i] == '<') {
+                    i--;
+                    break;
+                }
+                element += xml[i++];
+            }
+            out.push(element);
+        }
+    }
+
+    return out;
+}
+
+
+string XmlOp::minify(vector<string> text)
 {
     string minified = "";
     /*
@@ -55,7 +92,7 @@ string minify(vector<string> text)
 
 }
 
-string minify(string text)
+string XmlOp::minify(string text)
 {
     string minified = "";
     vector<string> elemnets = to_array(text);
@@ -108,7 +145,7 @@ vector<int> compress(string text, HashMaphash)
 //     cout<< i << ": "<<result[i]<< " " << endl;
 // }
 // }
-string decompress(vector<int> compressed, HashMap* hash)
+string XmlOp::decompress(vector<int> compressed, HashMap* hash)
 {
     string xml = "";
     for (int i = 0; i < compressed.size(); i++)
@@ -278,3 +315,54 @@ string process_string(const string& input) {
     return str;
 }
 */
+
+string XmlOp::insert_tabs(char s, int n)
+{
+    string insert_tabs;
+    for (int i = 0; i < n; i++)
+        insert_tabs += s;
+
+    return insert_tabs;
+}
+
+string XmlOp::format_xml(string file)
+{
+    queue <string> q;
+    string x = "";
+    string s = "";
+    string next;
+    long long i = 0, count;//count for the number of characters in tags and data
+    int count_tabs = 0;  //count for the number of tabs
+
+    q = XmlOp::to_queue(file);
+
+
+    while (!q.empty()) {
+        x = q.front();
+        q.pop();
+        if (x[0] == '<') {
+            //closing tags
+            if (x[1] == '/') {
+                count_tabs--;
+                s += insert_tabs('\t', count_tabs);
+                s += x;
+                s += "\r\n";
+            }
+            //opening tag
+            else {
+                s += insert_tabs('\t', count_tabs);
+                s += x;
+                count_tabs++;
+                s += "\r\n";
+            }
+        }
+        //data
+        else
+        {
+            s += insert_tabs('\t', count_tabs);
+            s += x;
+            s += "\r\n";
+        }
+    }
+    return s;
+}
