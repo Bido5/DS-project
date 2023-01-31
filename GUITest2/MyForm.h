@@ -4,7 +4,6 @@
 #include <msclr\marshal_cppstd.h>
 #include "Adapter.h"
 #include "MyForm1.h"
-#include "formatter.h"
 #include "operations.h"
 
 
@@ -1173,9 +1172,9 @@ namespace GUITest2 {
 		   //Create a new File
 	private: System::Void btn_newFile_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (createNewFile()) {
-		tb_XML_viewer->Text = "//Type here:";
-		pn_Formatting->BringToFront();
-		activateBTN(4);
+			tb_XML_viewer->Text = "//Type here:";
+			pn_Formatting->BringToFront();
+			activateBTN(4);
 		}
 	}
 
@@ -1243,7 +1242,7 @@ namespace GUITest2 {
 			ViewFileXml();
 	}
 
-	//prettify
+		   //prettify
 	private: System::Void Prettifier_Click(System::Object^ sender, System::EventArgs^ e) {
 		/*
 		if (file == nullptr) {
@@ -1254,7 +1253,7 @@ namespace GUITest2 {
 			file->toArray();
 			vector <string> elements = file->getElements();
 
-			
+
 
 			string text = minify(elements);
 			format_xml(&text);
@@ -1264,14 +1263,14 @@ namespace GUITest2 {
 		}
 		*/
 
-		string minified = minify(Adapter::to_unmanaged(tb_XML_viewer->Text));
-		format_xml(&minified);
-		tb_XML_viewer->Text = Adapter::to_managed(minified);
+		//string minified = XmlOp::minify(Adapter::to_unmanaged(tb_XML_viewer->Text));
+		string prettified = XmlOp::format_xml(Adapter::to_unmanaged(tb_XML_viewer->Text));
+		tb_XML_viewer->Text = Adapter::to_managed(prettified);
 
 	}
 
 	private: System::Void Corrector_Click(System::Object^ sender, System::EventArgs^ e) {
-	
+
 	}
 
 	private: System::Void Validator_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1292,9 +1291,9 @@ namespace GUITest2 {
 
 	}
 
-			//------------------------
-			//	compress window
-			//------------------------
+		   //------------------------
+		   //	compress window
+		   //------------------------
 
 	private: System::Void minify_btn_Click(System::Object^ sender, System::EventArgs^ e) {
 		file->toArray();
@@ -1302,7 +1301,7 @@ namespace GUITest2 {
 
 
 
-		string text = minify(elements);
+		string text = XmlOp::minify(elements);
 		file->saveFile(Adapter::to_unmanaged(Adapter::to_managed(text)));
 		c_Status->Text = "minifying complete";
 		unsavedChanges = false;
@@ -1329,44 +1328,44 @@ namespace GUITest2 {
 		   //------------------------------------
 
 				   //create file
-	bool createNewFile() {
-		createFileForm^ extraComp = gcnew createFileForm();
-		System::Windows::Forms::DialogResult dr = extraComp->ShowDialog(this);
-		if (dr == System::Windows::Forms::DialogResult::Cancel)
-		{
-			extraComp->Close();
-			return 0;
-		}
-		else if (dr == System::Windows::Forms::DialogResult::OK)
-		{
-			setFile(extraComp->getfilePath());
-			extraComp->Close();
-			return 1;
-		}
-	}
+		   bool createNewFile() {
+			   createFileForm^ extraComp = gcnew createFileForm();
+			   System::Windows::Forms::DialogResult dr = extraComp->ShowDialog(this);
+			   if (dr == System::Windows::Forms::DialogResult::Cancel)
+			   {
+				   extraComp->Close();
+				   return 0;
+			   }
+			   else if (dr == System::Windows::Forms::DialogResult::OK)
+			   {
+				   setFile(extraComp->getfilePath());
+				   extraComp->Close();
+				   return 1;
+			   }
+		   }
 		   // N/N
 
 		   //show original XML File
-	void ViewFileXml() {
-		if (file == nullptr) {
-			c_Status->Text = "Error: no file is selected. Select a file first to proceed";
-		}
-		else {
-			//file->toArray();
-			//vector<string> elements = file->getElements();
+		   void ViewFileXml() {
+			   if (file == nullptr) {
+				   c_Status->Text = "Error: no file is selected. Select a file first to proceed";
+			   }
+			   else {
+				   //file->toArray();
+				   //vector<string> elements = file->getElements();
 
-			tb_XML_viewer->Text = Adapter::to_managed(file->exportFile())->Replace("\n", Environment::NewLine);
-			/*
-			for (int i = 0; i < elements.size(); i++) {
-				   tb_XML_viewer->Text += Adapter::to_managed(elements.front());
-				   elements.erase(elements.begin());
-				   tb_XML_viewer->Text += "\r\n";
-			}
-			*/
+				   tb_XML_viewer->Text = Adapter::to_managed(file->exportFile())->Replace("\n", Environment::NewLine);
+				   /*
+				   for (int i = 0; i < elements.size(); i++) {
+						  tb_XML_viewer->Text += Adapter::to_managed(elements.front());
+						  elements.erase(elements.begin());
+						  tb_XML_viewer->Text += "\r\n";
+				   }
+				   */
 
-			c_Status->Text = "loading Successful";
-		}
-	}
+				   c_Status->Text = "loading Successful";
+			   }
+		   }
 		   //assign file name
 	public: Void setFile(String^ fileName) {
 		this->file = new File(Adapter::to_unmanaged(fileName));
@@ -1378,5 +1377,5 @@ namespace GUITest2 {
 
 
 
-};
+	};
 }
