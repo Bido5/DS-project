@@ -6,15 +6,16 @@
 
 using namespace std;
 
-int count = 0;
+// int count = 0;
 
 // this class is used to build tree depth first after receiving them in a vector
-int nextIndex = 1;
+// int next_Index = 1;
 class Node
 {
 private:
     string data;
     vector<Node *> children;
+    // int sizePerLevel;
 
 public:
     Node(string data)
@@ -33,5 +34,6 @@ public:
     void buildTree(vector<string> xml);
     void searchForTopic(Node *root, string topic);
     vector<string> getPosts();
+
     vector<string> getChildren(Node *node);
 };

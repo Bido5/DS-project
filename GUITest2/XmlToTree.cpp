@@ -24,33 +24,33 @@ vector<string> Node::getChildren(Node *node)
 }
 
 // this class is used to build tree depth first after receiving them in a vector
-int nextIndex = 1;
+int next_Index = 1;
 void Node::buildTree(vector<string> xml)
 {
 
-    for (int i = 0; i < xml.size(); i++)
+    for (int i = 0; next_Index < xml.size(); i++)
     {
         // check if it is closing tag
         // if yes return to go one level up
-        if (xml[nextIndex][1] == '/')
+        if (xml[next_Index][1] == '/')
         {
-            nextIndex++;
+            next_Index++;
             return;
         }
         // put the data on a node
-        Node *d = new Node(xml[nextIndex]);
+        Node *d = new Node(xml[next_Index]);
         children.emplace_back(d);
-        nextIndex++;
-        if (xml[nextIndex - 1][0] == '<') // enter recursion if not leaf node
+        next_Index++;
+        if (xml[next_Index - 1][0] == '<') // enter recursion if not leaf node
         {
             d->buildTree(xml); // building tree depth first;
         }
     }
 }
 
-
-bool checkBody(string body,string word){
-    if(body.find(word) != string::npos)  //to see if it is found in the body
+bool checkBody(string body, string word)
+{
+    if (body.find(word) != string::npos) // to see if it is found in the body
         return true;
     else
         return false;
@@ -70,37 +70,32 @@ void Node::searchForTopic(Node *root, string topic)
         if (root->data == "<body>")
         {
             bodyText = root->children[0]->data;
-            if( checkBody(bodyText,topic) ) //found the word in the body
+            if (checkBody(bodyText, topic)) // found the word in the body
             {
                 foundTopic = true;
-
             }
-
         }
         if (root->data == "<topic>")
         {
 
             string currentTopic;
-                currentTopic = (root->children[0]->data);
-                if (currentTopic.compare(topic) == 0)
-                {
-                    foundTopic = true;
-                }
-
-        }
-            if (foundTopic == true)
+            currentTopic = (root->children[0]->data);
+            if (currentTopic.compare(topic) == 0)
             {
-                postsList.push_back(bodyText);
-                foundTopic = false;
-
+                foundTopic = true;
             }
+        }
+        if (foundTopic == true)
+        {
+            postsList.push_back(bodyText);
+            foundTopic = false;
+        }
 
         searchForTopic(root->children[i], topic);
-
-
     }
 }
 
-vector<string> Node::getPosts(){
+vector<string> Node::getPosts()
+{
     return postsList;
 }
