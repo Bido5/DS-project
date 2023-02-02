@@ -11,14 +11,13 @@ using namespace std;
 // int count = 0;
 vector<string> postsList;
 
-vector<string> Node::getChildren(Node *node)
+vector<string> Node::getChildren(Node* node)
 {
     vector<string> childrenNames;
     for (int i = 0; i < children.size(); i++)
     {
         childrenNames.push_back(node->children[i]->data);
-        cout << endl
-             << node->children[i]->data;
+        //cout << endl << Node->children[i]->data;
     }
     return childrenNames;
 }
@@ -38,7 +37,7 @@ void Node::buildTree(vector<string> xml)
             return;
         }
         // put the data on a node
-        Node *d = new Node(xml[next_Index]);
+        Node* d = new Node(xml[next_Index]);
         children.emplace_back(d);
         next_Index++;
         if (xml[next_Index - 1][0] == '<') // enter recursion if not leaf node
@@ -48,15 +47,21 @@ void Node::buildTree(vector<string> xml)
     }
 }
 
-bool checkBody(string body, string word)
-{
-    if (body.find(word) != string::npos) // to see if it is found in the body
+bool checkBody(string body, string word) {
+    if (body.find(word) != string::npos)  //to see if it is found in the body
         return true;
     else
         return false;
 }
 string bodyText;
-void Node::searchForTopic(Node *root, string topic)
+
+vector<string> Node::search(Node* root, string topic) {
+    vector<string> postsList;
+    searchForTopic(root, topic, postsList);
+    return postsList;
+}
+
+void Node::searchForTopic(Node* root, string topic, vector<string>& postsList)
 {
     bool foundTopic = false;
     // leaf case
@@ -70,10 +75,12 @@ void Node::searchForTopic(Node *root, string topic)
         if (root->data == "<body>")
         {
             bodyText = root->children[0]->data;
-            if (checkBody(bodyText, topic)) // found the word in the body
+            if (checkBody(bodyText, topic)) //found the word in the body
             {
                 foundTopic = true;
+
             }
+
         }
         if (root->data == "<topic>")
         {
@@ -84,18 +91,21 @@ void Node::searchForTopic(Node *root, string topic)
             {
                 foundTopic = true;
             }
+
         }
         if (foundTopic == true)
         {
             postsList.push_back(bodyText);
             foundTopic = false;
+
         }
 
-        searchForTopic(root->children[i], topic);
+        searchForTopic(root->children[i], topic, postsList);
+
+
     }
 }
 
-vector<string> Node::getPosts()
-{
+vector<string> Node::getPosts() {
     return postsList;
 }

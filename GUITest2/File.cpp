@@ -6,7 +6,7 @@ File::File(string fileName)
 {
     //ctor
     this->fileName = fileName;
-  
+    toArray();
 }
 
 File::~File()
@@ -14,6 +14,7 @@ File::~File()
     //dtor
 }
 void File::toArray() {
+    vector <string> temp;
     string line;
     int space = 0;
     bool text = false;
@@ -22,36 +23,41 @@ void File::toArray() {
     xfile.open(fileName);
     while (!xfile.eof()) {
         getline(xfile, line);
-        lsize = line.size();
-        space = 0;
-        text = false;
-        while(space < lsize - 2) {
-            if (line[space] == ' ')
-                space += 4;
-            else if (line[space] == '\t')
-                space += 1;
-            else
-                break;
-        }
 
-        if (!(line[space + 1] == '/')) {
-            for (size_t i = space; i < lsize - 3; i++) {
-                if (line[i] == '<')
-                    i += 2;
-                else if (line[i] == '>') {
-                    elements.push_back(line.substr(space, i - space + 1));
-                    elements.push_back(line.substr(i + 1, lsize - 2 * i + space - 3));
-                    elements.push_back(line.substr((lsize - 2 - i + space), i - space + 2));
-                    text = true;
-                    break;
+        for (int i = 0; i < line.size(); i++) {
+            string s;
+            switch (line[i]) {
+            case '<':
+                while (i < line.size()) {
+                    s.push_back(line[i]);
+                    if (line[i] == '>')
+                        break;
+                    i++;
                 }
+                temp.push_back(s);
+                break;
+            case ' ':
+            case '\t':
+            case '\r':
+            case '\n':
+                continue;
+                break;
+            default:
+                while (i < line.size() && line[i] < 127 && line[i]>31) {
+                    if (line[i] == '<') {
+                        i--;
+                        break;
+                    }
+                    s.push_back(line[i++]);
+                }
+                temp.push_back(s);
             }
-        }
-        if (!text) {
-            elements.push_back(line.substr(space, lsize - space));
         }
 
     }
+    
+    elements = temp;
+
     xfile.close();
 }
 vector<string> File::getElements() {
@@ -62,6 +68,8 @@ void File::saveFile(string text) {
     xfile.open(fileName, std::ofstream::out | std::ofstream::trunc);
     xfile << text;
     xfile.close();
+
+    toArray();
 }
 
 string File::exportFile()

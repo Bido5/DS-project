@@ -1,4 +1,3 @@
-#include "iostream"
 #include <iostream>
 #include <stack>
 #include <string.h>
@@ -14,7 +13,7 @@ class Node
 {
 private:
     string data;
-    vector<Node *> children;
+    vector<Node*> children;
     // int sizePerLevel;
 
 public:
@@ -26,14 +25,19 @@ public:
     {
         return this->data;
     }
-    vector<Node *> getChildren()
+    vector<Node*> getChildren()
     {
         return children;
     }
 
+    vector<string> search(Node* root, string topic);
     void buildTree(vector<string> xml);
-    void searchForTopic(Node *root, string topic);
+    void print(Node* root);
+    void Traverse(Node* root);
+    void searchForTopic(Node* root, string topic, vector<string>& postsList);
     vector<string> getPosts();
 
-    vector<string> getChildren(Node *node);
+    void xmltojson(Node* node);
+    void viewJson();
+    vector<string> getChildren(Node* node);
 };
