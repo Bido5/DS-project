@@ -25,5 +25,9 @@ static ref class  Adapter
 		return unmanaged;
 			  
 	}
+
+public: static int to_Int(Decimal num) {
+	return System::Decimal::ToInt32(num);
+}
 };
 

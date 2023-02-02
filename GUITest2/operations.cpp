@@ -318,7 +318,7 @@ string XmlOp::correct(vector <pair<string, int>> errors, string s) {
             }
             else {
                 out += elements[i];
-                out += "</" + elements[i].substr(1, elements.size() - 1);
+                out += "</" + elements[i].substr(1, elements[i].size() - 1);
             }
         }
             
