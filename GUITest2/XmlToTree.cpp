@@ -24,6 +24,12 @@ vector<string> Node::getChildren(Node* node)
 
 // this class is used to build tree depth first after receiving them in a vector
 int next_Index = 1;
+void Node::reset() {
+    next_Index = 1;
+}
+
+
+
 void Node::buildTree(vector<string> xml)
 {
 
@@ -46,7 +52,6 @@ void Node::buildTree(vector<string> xml)
         }
     }
 }
-
 bool checkBody(string body, string word) {
     if (body.find(word) != string::npos)  //to see if it is found in the body
         return true;
@@ -54,13 +59,11 @@ bool checkBody(string body, string word) {
         return false;
 }
 string bodyText;
-
 vector<string> Node::search(Node* root, string topic) {
     vector<string> postsList;
     searchForTopic(root, topic, postsList);
     return postsList;
 }
-
 void Node::searchForTopic(Node* root, string topic, vector<string>& postsList)
 {
     bool foundTopic = false;
@@ -105,23 +108,24 @@ void Node::searchForTopic(Node* root, string topic, vector<string>& postsList)
 
     }
 }
-string Node::createJSON(Node* node)
-{
-    //int count_tabs = 2;
-    int count;
-    string json = "{\n";
-    json += " \"" + node->data.substr(1, node->data.length() - 2) + "\": {";
-    xmltojson(node,nullptr, json, 2);
-    json += "}";
-    return json;
+vector<string> Node::getPosts() {
+    return postsList;
 }
-void Node::xmltojson(Node* node,Node* parent, string& json, int level) {
-    
+string Node::insert(string s, int n)
+{
+    string insert;
+    for (int i = 0; i < n; i++)
+        insert += s;
+
+    return insert;
+}
+void Node::xmltojson(Node* node, Node* parent, string& json, int level) {
+
     bool foundRepeated = true;
     bool curlybracket = false;
     bool squarebracket = false;
     if (node == NULL) {
-        level-=2;
+        level -= 2;
         json += insert("\t", level);
         //cout << "}";
         return;
@@ -133,14 +137,14 @@ void Node::xmltojson(Node* node,Node* parent, string& json, int level) {
      */
     for (int i = 0; i < node->children.size(); i++)
     {
-       vector<Node*>childrenlist;
+        vector<Node*>childrenlist;
 
         if (node->children.size() > 1) {
-            
+
             if (node->children[0]->data.compare(node->children[1]->data) == 0)
             {
                 //if node has siblings with similar names
-                if (foundRepeated && i == 0) { 
+                if (foundRepeated && i == 0) {
                     json += "\n";
                     json += insert("\t", level);
                     json += "\"" + node->children[i]->data.substr(1, node->children[i]->data.length() - 2) + "\":";
@@ -154,7 +158,7 @@ void Node::xmltojson(Node* node,Node* parent, string& json, int level) {
                     }
                     /*json += insert("\t", level);
                     json += "{\n";*/
-                    
+
                     level++;
 
                 }
@@ -172,38 +176,39 @@ void Node::xmltojson(Node* node,Node* parent, string& json, int level) {
                     json += "\"" + node->children[i]->data.substr(1, node->children[i]->data.length() - 2) + "\": ";
                     level++;
                 }
-                
+
             }
         }
-        
-        
+
+
         else if (node->children[i]->children.size() == 0) //leaf node
-        { 
-            
-            json += "\"" + node->children[i]->data + "\",\n";
+        {
+            json += "\"" + node->children[i]->data + "\"\n";
+
+
         }
         else
         {
             json += "\n";
             json += insert("\t", level);
-            json += "\"" + node->children[i]->data.substr(1, node->children[i]->data.length()-2 ) + "\":";
+            json += "\"" + node->children[i]->data.substr(1, node->children[i]->data.length() - 2) + "\":";
             json += "{\n";
             json += insert("\t", level);
             curlybracket = true;
             level++;
-            
+
         }
-        
+
         foundRepeated = false;
         //cout<<json;
-        xmltojson(node->children[i],node, json, level);
+        xmltojson(node->children[i], node, json, level);
         level--;
         if (curlybracket) {
             json += insert("\t", level);
             json += "}\n";
             curlybracket = false;
         }
-        if(squarebracket) 
+        if (squarebracket)
         {
             json += insert("\t", level);
             json += "]\n";
@@ -213,7 +218,13 @@ void Node::xmltojson(Node* node,Node* parent, string& json, int level) {
 
 
 }
-
-vector<string> Node::getPosts() {
-    return postsList;
+string Node::createJSON(Node* node)
+{
+    //int count_tabs = 2;
+    int count;
+    string json = "{\n";
+    json += " \"" + node->data.substr(1, node->data.length() - 2) + "\": {";
+    xmltojson(node, nullptr, json, 2);
+    json += "}";
+    return json;
 }

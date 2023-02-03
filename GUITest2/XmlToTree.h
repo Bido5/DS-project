@@ -15,8 +15,11 @@ private:
     string data;
     vector<Node*> children;
     // int sizePerLevel;
+    void Node::xmltojson(Node* node, Node* parent, string& json, int level);
+    string insert(string s, int n);
 
 public:
+    
     Node(string data)
     {
         this->data = data;
@@ -29,16 +32,13 @@ public:
     {
         return children;
     }
-
+    void reset();
     vector<string> search(Node* root, string topic);
     void buildTree(vector<string> xml);
     void print(Node* root);
     void Traverse(Node* root);
     void searchForTopic(Node* root, string topic, vector<string>& postsList);
     vector<string> getPosts();
-    void xmltojson(Node* node,Node* parent, string& json, int level);
-    string createJSON(Node* node);
-    void xmltojson(Node* node);
-    void viewJson();
     vector<string> getChildren(Node* node);
+    string Node::createJSON(Node* node);
 };

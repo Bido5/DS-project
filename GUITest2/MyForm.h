@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "File.h"
 #include "createFileForm.h"
 #include <msclr\marshal_cppstd.h>
@@ -175,6 +175,8 @@ private: System::Windows::Forms::Button^ btn_mutual;
 private: System::Windows::Forms::Label^ lbl_mutual_user;
 private: System::Windows::Forms::Label^ lbl_mutual;
 private: System::Windows::Forms::Label^ label9;
+private: System::Windows::Forms::RichTextBox^ Json_view;
+private: System::Windows::Forms::Button^ btn_Json;
 
 
 
@@ -210,6 +212,13 @@ private: System::Windows::Forms::Label^ label9;
 			   this->Status_lb = (gcnew System::Windows::Forms::Label());
 			   this->btn_stCollapse = (gcnew System::Windows::Forms::Button());
 			   this->pn_cn = (gcnew System::Windows::Forms::Panel());
+			   this->pn_compression = (gcnew System::Windows::Forms::Panel());
+			   this->Json_view = (gcnew System::Windows::Forms::RichTextBox());
+			   this->flowLayoutPanel1 = (gcnew System::Windows::Forms::FlowLayoutPanel());
+			   this->minify_btn = (gcnew System::Windows::Forms::Button());
+			   this->compress_btn = (gcnew System::Windows::Forms::Button());
+			   this->btn_decompress = (gcnew System::Windows::Forms::Button());
+			   this->btn_Json = (gcnew System::Windows::Forms::Button());
 			   this->pn_Home = (gcnew System::Windows::Forms::Panel());
 			   this->flowLayoutPanel2 = (gcnew System::Windows::Forms::FlowLayoutPanel());
 			   this->Welcome_lbl = (gcnew System::Windows::Forms::Label());
@@ -261,11 +270,6 @@ private: System::Windows::Forms::Label^ label9;
 			   this->Corrector = (gcnew System::Windows::Forms::ToolStripButton());
 			   this->btn_restore = (gcnew System::Windows::Forms::ToolStripButton());
 			   this->tb_XML_viewer = (gcnew System::Windows::Forms::TextBox());
-			   this->pn_compression = (gcnew System::Windows::Forms::Panel());
-			   this->flowLayoutPanel1 = (gcnew System::Windows::Forms::FlowLayoutPanel());
-			   this->minify_btn = (gcnew System::Windows::Forms::Button());
-			   this->compress_btn = (gcnew System::Windows::Forms::Button());
-			   this->btn_decompress = (gcnew System::Windows::Forms::Button());
 			   this->pn_tb->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->logo))->BeginInit();
 			   this->pn_mb->SuspendLayout();
@@ -273,6 +277,8 @@ private: System::Windows::Forms::Label^ label9;
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->big_Logo))->BeginInit();
 			   this->pn_sb->SuspendLayout();
 			   this->pn_cn->SuspendLayout();
+			   this->pn_compression->SuspendLayout();
+			   this->flowLayoutPanel1->SuspendLayout();
 			   this->pn_Home->SuspendLayout();
 			   this->flowLayoutPanel2->SuspendLayout();
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->cn_FileMenu))->BeginInit();
@@ -293,8 +299,6 @@ private: System::Windows::Forms::Label^ label9;
 			   this->pn_Formatting->SuspendLayout();
 			   this->panel2->SuspendLayout();
 			   this->Format_toolStrip->SuspendLayout();
-			   this->pn_compression->SuspendLayout();
-			   this->flowLayoutPanel1->SuspendLayout();
 			   this->SuspendLayout();
 			   // 
 			   // pn_tb
@@ -409,7 +413,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->pn_mb->Dock = System::Windows::Forms::DockStyle::Left;
 			   this->pn_mb->Location = System::Drawing::Point(0, 61);
 			   this->pn_mb->Name = L"pn_mb";
-			   this->pn_mb->Size = System::Drawing::Size(200, 688);
+			   this->pn_mb->Size = System::Drawing::Size(238, 688);
 			   this->pn_mb->TabIndex = 3;
 			   // 
 			   // btn_searchTab
@@ -427,7 +431,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->btn_searchTab->Location = System::Drawing::Point(0, 412);
 			   this->btn_searchTab->Name = L"btn_searchTab";
 			   this->btn_searchTab->Padding = System::Windows::Forms::Padding(5, 0, 0, 0);
-			   this->btn_searchTab->Size = System::Drawing::Size(200, 49);
+			   this->btn_searchTab->Size = System::Drawing::Size(238, 49);
 			   this->btn_searchTab->TabIndex = 10;
 			   this->btn_searchTab->Text = L"Search";
 			   this->btn_searchTab->UseVisualStyleBackColor = false;
@@ -441,7 +445,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->flowLayoutPanel3->FlowDirection = System::Windows::Forms::FlowDirection::RightToLeft;
 			   this->flowLayoutPanel3->Location = System::Drawing::Point(0, 0);
 			   this->flowLayoutPanel3->Name = L"flowLayoutPanel3";
-			   this->flowLayoutPanel3->Size = System::Drawing::Size(200, 186);
+			   this->flowLayoutPanel3->Size = System::Drawing::Size(238, 186);
 			   this->flowLayoutPanel3->TabIndex = 9;
 			   // 
 			   // collapse_btn
@@ -454,7 +458,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->collapse_btn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
 			   this->collapse_btn->ForeColor = System::Drawing::SystemColors::Control;
-			   this->collapse_btn->Location = System::Drawing::Point(180, 3);
+			   this->collapse_btn->Location = System::Drawing::Point(218, 3);
 			   this->collapse_btn->Name = L"collapse_btn";
 			   this->collapse_btn->Size = System::Drawing::Size(17, 40);
 			   this->collapse_btn->TabIndex = 4;
@@ -465,7 +469,7 @@ private: System::Windows::Forms::Label^ label9;
 			   // 
 			   this->big_Logo->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"big_Logo.BackgroundImage")));
 			   this->big_Logo->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
-			   this->big_Logo->Location = System::Drawing::Point(0, 46);
+			   this->big_Logo->Location = System::Drawing::Point(15, 0);
 			   this->big_Logo->Margin = System::Windows::Forms::Padding(3, 0, 3, 3);
 			   this->big_Logo->Name = L"big_Logo";
 			   this->big_Logo->Size = System::Drawing::Size(197, 86);
@@ -488,9 +492,9 @@ private: System::Windows::Forms::Label^ label9;
 			   this->btn_Format->Location = System::Drawing::Point(0, 247);
 			   this->btn_Format->Name = L"btn_Format";
 			   this->btn_Format->Padding = System::Windows::Forms::Padding(5, 0, 0, 0);
-			   this->btn_Format->Size = System::Drawing::Size(200, 49);
+			   this->btn_Format->Size = System::Drawing::Size(238, 49);
 			   this->btn_Format->TabIndex = 8;
-			   this->btn_Format->Text = L"Format";
+			   this->btn_Format->Text = L"Editor";
 			   this->btn_Format->UseVisualStyleBackColor = false;
 			   this->btn_Format->Click += gcnew System::EventHandler(this, &MyForm::btn_Format_Click_1);
 			   // 
@@ -509,7 +513,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->btn_Home->Location = System::Drawing::Point(0, 192);
 			   this->btn_Home->Name = L"btn_Home";
 			   this->btn_Home->Padding = System::Windows::Forms::Padding(5, 0, 0, 0);
-			   this->btn_Home->Size = System::Drawing::Size(200, 49);
+			   this->btn_Home->Size = System::Drawing::Size(238, 49);
 			   this->btn_Home->TabIndex = 7;
 			   this->btn_Home->Text = L"Home";
 			   this->btn_Home->UseVisualStyleBackColor = false;
@@ -530,9 +534,9 @@ private: System::Windows::Forms::Label^ label9;
 			   this->btn_Compression->Location = System::Drawing::Point(0, 302);
 			   this->btn_Compression->Name = L"btn_Compression";
 			   this->btn_Compression->Padding = System::Windows::Forms::Padding(5, 0, 0, 0);
-			   this->btn_Compression->Size = System::Drawing::Size(200, 49);
+			   this->btn_Compression->Size = System::Drawing::Size(238, 49);
 			   this->btn_Compression->TabIndex = 3;
-			   this->btn_Compression->Text = L"Compress";
+			   this->btn_Compression->Text = L"Compress/Json";
 			   this->btn_Compression->UseVisualStyleBackColor = false;
 			   this->btn_Compression->Click += gcnew System::EventHandler(this, &MyForm::btn_Compression_Click);
 			   // 
@@ -551,7 +555,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->btn_Insights->Location = System::Drawing::Point(0, 357);
 			   this->btn_Insights->Name = L"btn_Insights";
 			   this->btn_Insights->Padding = System::Windows::Forms::Padding(5, 0, 0, 0);
-			   this->btn_Insights->Size = System::Drawing::Size(200, 49);
+			   this->btn_Insights->Size = System::Drawing::Size(238, 49);
 			   this->btn_Insights->TabIndex = 2;
 			   this->btn_Insights->Text = L"Insights";
 			   this->btn_Insights->UseVisualStyleBackColor = false;
@@ -566,9 +570,9 @@ private: System::Windows::Forms::Label^ label9;
 			   this->pn_sb->Controls->Add(this->Status_lb);
 			   this->pn_sb->Controls->Add(this->btn_stCollapse);
 			   this->pn_sb->Dock = System::Windows::Forms::DockStyle::Bottom;
-			   this->pn_sb->Location = System::Drawing::Point(200, 647);
+			   this->pn_sb->Location = System::Drawing::Point(238, 647);
 			   this->pn_sb->Name = L"pn_sb";
-			   this->pn_sb->Size = System::Drawing::Size(1300, 102);
+			   this->pn_sb->Size = System::Drawing::Size(1262, 102);
 			   this->pn_sb->TabIndex = 4;
 			   // 
 			   // button1
@@ -581,7 +585,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
 			   this->button1->ForeColor = System::Drawing::SystemColors::Control;
-			   this->button1->Location = System::Drawing::Point(490, 475);
+			   this->button1->Location = System::Drawing::Point(471, 475);
 			   this->button1->Name = L"button1";
 			   this->button1->Size = System::Drawing::Size(168, 52);
 			   this->button1->TabIndex = 9;
@@ -603,7 +607,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->c_Status->Name = L"c_Status";
 			   this->c_Status->ReadOnly = true;
 			   this->c_Status->ScrollBars = System::Windows::Forms::RichTextBoxScrollBars::Vertical;
-			   this->c_Status->Size = System::Drawing::Size(1097, 48);
+			   this->c_Status->Size = System::Drawing::Size(1059, 48);
 			   this->c_Status->TabIndex = 4;
 			   this->c_Status->Text = L"...";
 			   // 
@@ -630,7 +634,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->btn_stCollapse->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				   static_cast<System::Byte>(0)));
 			   this->btn_stCollapse->ForeColor = System::Drawing::SystemColors::Control;
-			   this->btn_stCollapse->Location = System::Drawing::Point(1258, 0);
+			   this->btn_stCollapse->Location = System::Drawing::Point(1220, 0);
 			   this->btn_stCollapse->Name = L"btn_stCollapse";
 			   this->btn_stCollapse->Size = System::Drawing::Size(40, 17);
 			   this->btn_stCollapse->TabIndex = 6;
@@ -642,15 +646,125 @@ private: System::Windows::Forms::Label^ label9;
 			   this->pn_cn->BackColor = System::Drawing::Color::Transparent;
 			   this->pn_cn->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			   this->pn_cn->Controls->Add(this->pn_Home);
+			   this->pn_cn->Controls->Add(this->pn_compression);
 			   this->pn_cn->Controls->Add(this->pn_Insights);
 			   this->pn_cn->Controls->Add(this->pn_Search);
 			   this->pn_cn->Controls->Add(this->pn_Formatting);
-			   this->pn_cn->Controls->Add(this->pn_compression);
 			   this->pn_cn->Dock = System::Windows::Forms::DockStyle::Fill;
-			   this->pn_cn->Location = System::Drawing::Point(200, 61);
+			   this->pn_cn->Location = System::Drawing::Point(238, 61);
 			   this->pn_cn->Name = L"pn_cn";
-			   this->pn_cn->Size = System::Drawing::Size(1300, 586);
+			   this->pn_cn->Size = System::Drawing::Size(1262, 586);
 			   this->pn_cn->TabIndex = 5;
+			   // 
+			   // pn_compression
+			   // 
+			   this->pn_compression->Controls->Add(this->Json_view);
+			   this->pn_compression->Controls->Add(this->flowLayoutPanel1);
+			   this->pn_compression->Dock = System::Windows::Forms::DockStyle::Fill;
+			   this->pn_compression->Location = System::Drawing::Point(0, 0);
+			   this->pn_compression->Name = L"pn_compression";
+			   this->pn_compression->Size = System::Drawing::Size(1262, 586);
+			   this->pn_compression->TabIndex = 3;
+			   // 
+			   // Json_view
+			   // 
+			   this->Json_view->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				   | System::Windows::Forms::AnchorStyles::Left)
+				   | System::Windows::Forms::AnchorStyles::Right));
+			   this->Json_view->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(41)), static_cast<System::Int32>(static_cast<System::Byte>(44)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(53)));
+			   this->Json_view->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			   this->Json_view->Font = (gcnew System::Drawing::Font(L"Corbel Light", 14.25F));
+			   this->Json_view->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
+			   this->Json_view->Location = System::Drawing::Point(40, 109);
+			   this->Json_view->Margin = System::Windows::Forms::Padding(0, 32, 0, 0);
+			   this->Json_view->Name = L"Json_view";
+			   this->Json_view->ReadOnly = true;
+			   this->Json_view->ScrollBars = System::Windows::Forms::RichTextBoxScrollBars::Vertical;
+			   this->Json_view->Size = System::Drawing::Size(1121, 424);
+			   this->Json_view->TabIndex = 5;
+			   this->Json_view->Text = L"...";
+			   // 
+			   // flowLayoutPanel1
+			   // 
+			   this->flowLayoutPanel1->Controls->Add(this->minify_btn);
+			   this->flowLayoutPanel1->Controls->Add(this->compress_btn);
+			   this->flowLayoutPanel1->Controls->Add(this->btn_decompress);
+			   this->flowLayoutPanel1->Controls->Add(this->btn_Json);
+			   this->flowLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Top;
+			   this->flowLayoutPanel1->Location = System::Drawing::Point(0, 0);
+			   this->flowLayoutPanel1->Name = L"flowLayoutPanel1";
+			   this->flowLayoutPanel1->Size = System::Drawing::Size(1262, 53);
+			   this->flowLayoutPanel1->TabIndex = 1;
+			   // 
+			   // minify_btn
+			   // 
+			   this->minify_btn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(41)), static_cast<System::Int32>(static_cast<System::Byte>(44)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(53)));
+			   this->minify_btn->FlatAppearance->BorderSize = 0;
+			   this->minify_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->minify_btn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold));
+			   this->minify_btn->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
+			   this->minify_btn->Location = System::Drawing::Point(3, 3);
+			   this->minify_btn->Name = L"minify_btn";
+			   this->minify_btn->Size = System::Drawing::Size(122, 49);
+			   this->minify_btn->TabIndex = 1;
+			   this->minify_btn->Text = L"minify";
+			   this->minify_btn->UseVisualStyleBackColor = false;
+			   this->minify_btn->Click += gcnew System::EventHandler(this, &MyForm::minify_btn_Click);
+			   // 
+			   // compress_btn
+			   // 
+			   this->compress_btn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(41)), static_cast<System::Int32>(static_cast<System::Byte>(44)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(53)));
+			   this->compress_btn->FlatAppearance->BorderSize = 0;
+			   this->compress_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->compress_btn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold));
+			   this->compress_btn->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
+			   this->compress_btn->Location = System::Drawing::Point(131, 3);
+			   this->compress_btn->Name = L"compress_btn";
+			   this->compress_btn->Size = System::Drawing::Size(122, 49);
+			   this->compress_btn->TabIndex = 0;
+			   this->compress_btn->Text = L"compress";
+			   this->compress_btn->UseVisualStyleBackColor = false;
+			   this->compress_btn->Click += gcnew System::EventHandler(this, &MyForm::compress_btn_Click);
+			   // 
+			   // btn_decompress
+			   // 
+			   this->btn_decompress->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(41)), static_cast<System::Int32>(static_cast<System::Byte>(44)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(53)));
+			   this->btn_decompress->FlatAppearance->BorderSize = 0;
+			   this->btn_decompress->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->btn_decompress->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold));
+			   this->btn_decompress->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
+			   this->btn_decompress->Location = System::Drawing::Point(259, 3);
+			   this->btn_decompress->Name = L"btn_decompress";
+			   this->btn_decompress->Size = System::Drawing::Size(122, 49);
+			   this->btn_decompress->TabIndex = 2;
+			   this->btn_decompress->Text = L"decompress";
+			   this->btn_decompress->UseVisualStyleBackColor = false;
+			   this->btn_decompress->Click += gcnew System::EventHandler(this, &MyForm::btn_decompress_Click);
+			   // 
+			   // btn_Json
+			   // 
+			   this->btn_Json->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(41)), static_cast<System::Int32>(static_cast<System::Byte>(44)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(53)));
+			   this->btn_Json->FlatAppearance->BorderSize = 0;
+			   this->btn_Json->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			   this->btn_Json->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold));
+			   this->btn_Json->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
+				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
+			   this->btn_Json->Location = System::Drawing::Point(387, 3);
+			   this->btn_Json->Name = L"btn_Json";
+			   this->btn_Json->Size = System::Drawing::Size(122, 49);
+			   this->btn_Json->TabIndex = 3;
+			   this->btn_Json->Text = L"Json";
+			   this->btn_Json->UseVisualStyleBackColor = false;
+			   this->btn_Json->Click += gcnew System::EventHandler(this, &MyForm::btn_Json_Click);
 			   // 
 			   // pn_Home
 			   // 
@@ -658,7 +772,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->pn_Home->Dock = System::Windows::Forms::DockStyle::Fill;
 			   this->pn_Home->Location = System::Drawing::Point(0, 0);
 			   this->pn_Home->Name = L"pn_Home";
-			   this->pn_Home->Size = System::Drawing::Size(1300, 586);
+			   this->pn_Home->Size = System::Drawing::Size(1262, 586);
 			   this->pn_Home->TabIndex = 0;
 			   // 
 			   // flowLayoutPanel2
@@ -670,7 +784,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->flowLayoutPanel2->FlowDirection = System::Windows::Forms::FlowDirection::TopDown;
 			   this->flowLayoutPanel2->Location = System::Drawing::Point(0, 0);
 			   this->flowLayoutPanel2->Name = L"flowLayoutPanel2";
-			   this->flowLayoutPanel2->Size = System::Drawing::Size(1300, 586);
+			   this->flowLayoutPanel2->Size = System::Drawing::Size(1262, 586);
 			   this->flowLayoutPanel2->TabIndex = 0;
 			   // 
 			   // Welcome_lbl
@@ -795,7 +909,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->pn_Insights->Dock = System::Windows::Forms::DockStyle::Fill;
 			   this->pn_Insights->Location = System::Drawing::Point(0, 0);
 			   this->pn_Insights->Name = L"pn_Insights";
-			   this->pn_Insights->Size = System::Drawing::Size(1300, 586);
+			   this->pn_Insights->Size = System::Drawing::Size(1262, 586);
 			   this->pn_Insights->TabIndex = 4;
 			   // 
 			   // flowLayoutPanel8
@@ -810,7 +924,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->flowLayoutPanel8->Location = System::Drawing::Point(0, 0);
 			   this->flowLayoutPanel8->Name = L"flowLayoutPanel8";
 			   this->flowLayoutPanel8->Padding = System::Windows::Forms::Padding(20);
-			   this->flowLayoutPanel8->Size = System::Drawing::Size(859, 586);
+			   this->flowLayoutPanel8->Size = System::Drawing::Size(821, 586);
 			   this->flowLayoutPanel8->TabIndex = 1;
 			   // 
 			   // flowLayoutPanel6
@@ -1044,7 +1158,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->flowLayoutPanel4->Controls->Add(this->usersList);
 			   this->flowLayoutPanel4->Dock = System::Windows::Forms::DockStyle::Right;
 			   this->flowLayoutPanel4->FlowDirection = System::Windows::Forms::FlowDirection::TopDown;
-			   this->flowLayoutPanel4->Location = System::Drawing::Point(859, 0);
+			   this->flowLayoutPanel4->Location = System::Drawing::Point(821, 0);
 			   this->flowLayoutPanel4->Name = L"flowLayoutPanel4";
 			   this->flowLayoutPanel4->Padding = System::Windows::Forms::Padding(20);
 			   this->flowLayoutPanel4->Size = System::Drawing::Size(441, 586);
@@ -1144,7 +1258,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->pn_Search->Dock = System::Windows::Forms::DockStyle::Fill;
 			   this->pn_Search->Location = System::Drawing::Point(0, 0);
 			   this->pn_Search->Name = L"pn_Search";
-			   this->pn_Search->Size = System::Drawing::Size(1300, 586);
+			   this->pn_Search->Size = System::Drawing::Size(1262, 586);
 			   this->pn_Search->TabIndex = 1;
 			   // 
 			   // flowLayoutPanel5
@@ -1156,7 +1270,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->flowLayoutPanel5->Location = System::Drawing::Point(0, 0);
 			   this->flowLayoutPanel5->Name = L"flowLayoutPanel5";
 			   this->flowLayoutPanel5->Padding = System::Windows::Forms::Padding(40, 40, 0, 40);
-			   this->flowLayoutPanel5->Size = System::Drawing::Size(1300, 127);
+			   this->flowLayoutPanel5->Size = System::Drawing::Size(1262, 127);
 			   this->flowLayoutPanel5->TabIndex = 1;
 			   // 
 			   // textBox1
@@ -1221,7 +1335,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->tb_search->Name = L"tb_search";
 			   this->tb_search->ReadOnly = true;
 			   this->tb_search->ScrollBars = System::Windows::Forms::RichTextBoxScrollBars::Vertical;
-			   this->tb_search->Size = System::Drawing::Size(1027, 397);
+			   this->tb_search->Size = System::Drawing::Size(989, 397);
 			   this->tb_search->TabIndex = 3;
 			   this->tb_search->Text = L"";
 			   // 
@@ -1231,7 +1345,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->pn_Formatting->Dock = System::Windows::Forms::DockStyle::Fill;
 			   this->pn_Formatting->Location = System::Drawing::Point(0, 0);
 			   this->pn_Formatting->Name = L"pn_Formatting";
-			   this->pn_Formatting->Size = System::Drawing::Size(1300, 586);
+			   this->pn_Formatting->Size = System::Drawing::Size(1262, 586);
 			   this->pn_Formatting->TabIndex = 2;
 			   // 
 			   // panel2
@@ -1242,7 +1356,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->panel2->Location = System::Drawing::Point(0, 0);
 			   this->panel2->Margin = System::Windows::Forms::Padding(50);
 			   this->panel2->Name = L"panel2";
-			   this->panel2->Size = System::Drawing::Size(1300, 586);
+			   this->panel2->Size = System::Drawing::Size(1262, 586);
 			   this->panel2->TabIndex = 3;
 			   // 
 			   // Format_toolStrip
@@ -1256,7 +1370,7 @@ private: System::Windows::Forms::Label^ label9;
 			   this->Format_toolStrip->Location = System::Drawing::Point(0, 0);
 			   this->Format_toolStrip->Name = L"Format_toolStrip";
 			   this->Format_toolStrip->RenderMode = System::Windows::Forms::ToolStripRenderMode::Professional;
-			   this->Format_toolStrip->Size = System::Drawing::Size(1300, 53);
+			   this->Format_toolStrip->Size = System::Drawing::Size(1262, 53);
 			   this->Format_toolStrip->TabIndex = 5;
 			   this->Format_toolStrip->Text = L"toolStrip1";
 			   // 
@@ -1378,79 +1492,10 @@ private: System::Windows::Forms::Label^ label9;
 			   this->tb_XML_viewer->Multiline = true;
 			   this->tb_XML_viewer->Name = L"tb_XML_viewer";
 			   this->tb_XML_viewer->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-			   this->tb_XML_viewer->Size = System::Drawing::Size(1200, 430);
+			   this->tb_XML_viewer->Size = System::Drawing::Size(1162, 430);
 			   this->tb_XML_viewer->TabIndex = 4;
 			   this->tb_XML_viewer->Text = L"Select an operation";
 			   this->tb_XML_viewer->TextChanged += gcnew System::EventHandler(this, &MyForm::tb_XML_viewer_TextChanged);
-			   // 
-			   // pn_compression
-			   // 
-			   this->pn_compression->Controls->Add(this->flowLayoutPanel1);
-			   this->pn_compression->Dock = System::Windows::Forms::DockStyle::Fill;
-			   this->pn_compression->Location = System::Drawing::Point(0, 0);
-			   this->pn_compression->Name = L"pn_compression";
-			   this->pn_compression->Size = System::Drawing::Size(1300, 586);
-			   this->pn_compression->TabIndex = 3;
-			   // 
-			   // flowLayoutPanel1
-			   // 
-			   this->flowLayoutPanel1->Controls->Add(this->minify_btn);
-			   this->flowLayoutPanel1->Controls->Add(this->compress_btn);
-			   this->flowLayoutPanel1->Controls->Add(this->btn_decompress);
-			   this->flowLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Top;
-			   this->flowLayoutPanel1->Location = System::Drawing::Point(0, 0);
-			   this->flowLayoutPanel1->Name = L"flowLayoutPanel1";
-			   this->flowLayoutPanel1->Size = System::Drawing::Size(1300, 586);
-			   this->flowLayoutPanel1->TabIndex = 1;
-			   // 
-			   // minify_btn
-			   // 
-			   this->minify_btn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(41)), static_cast<System::Int32>(static_cast<System::Byte>(44)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(53)));
-			   this->minify_btn->FlatAppearance->BorderSize = 0;
-			   this->minify_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->minify_btn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold));
-			   this->minify_btn->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
-			   this->minify_btn->Location = System::Drawing::Point(3, 3);
-			   this->minify_btn->Name = L"minify_btn";
-			   this->minify_btn->Size = System::Drawing::Size(122, 49);
-			   this->minify_btn->TabIndex = 1;
-			   this->minify_btn->Text = L"minify";
-			   this->minify_btn->UseVisualStyleBackColor = false;
-			   this->minify_btn->Click += gcnew System::EventHandler(this, &MyForm::minify_btn_Click);
-			   // 
-			   // compress_btn
-			   // 
-			   this->compress_btn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(41)), static_cast<System::Int32>(static_cast<System::Byte>(44)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(53)));
-			   this->compress_btn->FlatAppearance->BorderSize = 0;
-			   this->compress_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->compress_btn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold));
-			   this->compress_btn->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
-			   this->compress_btn->Location = System::Drawing::Point(131, 3);
-			   this->compress_btn->Name = L"compress_btn";
-			   this->compress_btn->Size = System::Drawing::Size(122, 49);
-			   this->compress_btn->TabIndex = 0;
-			   this->compress_btn->Text = L"compress";
-			   this->compress_btn->UseVisualStyleBackColor = false;
-			   // 
-			   // btn_decompress
-			   // 
-			   this->btn_decompress->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(41)), static_cast<System::Int32>(static_cast<System::Byte>(44)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(53)));
-			   this->btn_decompress->FlatAppearance->BorderSize = 0;
-			   this->btn_decompress->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			   this->btn_decompress->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Bold));
-			   this->btn_decompress->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(145)),
-				   static_cast<System::Int32>(static_cast<System::Byte>(69)));
-			   this->btn_decompress->Location = System::Drawing::Point(259, 3);
-			   this->btn_decompress->Name = L"btn_decompress";
-			   this->btn_decompress->Size = System::Drawing::Size(122, 49);
-			   this->btn_decompress->TabIndex = 2;
-			   this->btn_decompress->Text = L"decompress";
-			   this->btn_decompress->UseVisualStyleBackColor = false;
 			   // 
 			   // MyForm
 			   // 
@@ -1481,6 +1526,8 @@ private: System::Windows::Forms::Label^ label9;
 			   this->pn_sb->ResumeLayout(false);
 			   this->pn_sb->PerformLayout();
 			   this->pn_cn->ResumeLayout(false);
+			   this->pn_compression->ResumeLayout(false);
+			   this->flowLayoutPanel1->ResumeLayout(false);
 			   this->pn_Home->ResumeLayout(false);
 			   this->flowLayoutPanel2->ResumeLayout(false);
 			   this->flowLayoutPanel2->PerformLayout();
@@ -1511,8 +1558,6 @@ private: System::Windows::Forms::Label^ label9;
 			   this->panel2->PerformLayout();
 			   this->Format_toolStrip->ResumeLayout(false);
 			   this->Format_toolStrip->PerformLayout();
-			   this->pn_compression->ResumeLayout(false);
-			   this->flowLayoutPanel1->ResumeLayout(false);
 			   this->ResumeLayout(false);
 
 		   }
@@ -1780,14 +1825,36 @@ private: System::Windows::Forms::Label^ label9;
 		vector <string> elements = file->getElements();
 		string text = XmlOp::minify(elements);
 		save(Adapter::to_unmanaged(Adapter::to_managed(text)));
-
-		/*
-		file->saveFile(Adapter::to_unmanaged(Adapter::to_managed(text)));
-		c_Status->Text = "minifying complete";
-		unsavedChanges = false;
-		*/
 	}
+	private: System::Void compress_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+		XmlOp::compress(file->exportFile());
+		c_Status->Text = "compressed successfully in file compressed.txt";
+		ifstream cfile;
+		cfile.open("compressed.txt");
+	}
+	private: System::Void btn_decompress_Click(System::Object^ sender, System::EventArgs^ e) {
+		ifstream cfile;
+		cfile.open("compressed.txt");
+		if (cfile.fail())
+			c_Status->Text = "failed";
+		if (cfile.is_open()) {
+			c_Status->Text = "opened";
+			string line;
+			string s;
+			while (!cfile.eof())
+			{
+				getline(cfile, line);
+				cout << line;
+				s += line;
+				s += "\r\n";
+			}
+			cfile.close();
 
+			XmlOp::decompress(s);
+
+			c_Status->Text = "decompressed successfully in file decompressed.txt";
+		}
+	}
 			//------------------------
 			//	search window
 			//------------------------
@@ -1947,7 +2014,10 @@ private: System::Windows::Forms::Label^ label9;
 					btn_Insights->Enabled = true;
 					btn_searchTab->Enabled = true;
 
+					
 					trial = new Node(file->getElements()[0]);
+					usersList->Items->Clear();
+					trial->reset();
 					trial->buildTree(file->getElements());
 
 					users = new Graph(file->getElements());
@@ -2069,5 +2139,11 @@ private: System::Windows::Forms::Label^ label9;
 
 	}
 
+
+
+private: System::Void btn_Json_Click(System::Object^ sender, System::EventArgs^ e) {
+	Json_view->Text = Adapter::to_managed(trial->createJSON(trial));
+	
+}
 };
 }

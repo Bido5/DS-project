@@ -1,5 +1,6 @@
 #include "HashMap.h"
 
+
 int HashMap::counter = 0;
 int HashMap::hashString(char key)
 { // calculate key value for the list which is the compressed value
@@ -8,7 +9,7 @@ int HashMap::hashString(char key)
 
 void HashMap::insert(char key, string value)
 {
-   idx = hashString(key);
+    idx = hashString(key);
     if (table[idx].empty())
     {
         table[idx] = value; // check is the content of array[i] is empty to insert a value
