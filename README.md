@@ -24,6 +24,7 @@ Insights tab (Network Analysis) <br />
   this tab and search only works if the input file contained these requirements(for more information see the attached sample): <br />
   -the XML file represents the users data in a social network (their posts, followers, ...etc). <br />
   -The user contains: id (unique across the network), name, list of his posts and followers. <br />
+  -starts with the tag: <users>
   <br /> 
   the relation between the followers is represented using the graph data hence there are some extracted important data <br />
   ● who is the most influencer user (has the most followers). <br />
