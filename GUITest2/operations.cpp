@@ -107,7 +107,7 @@ string XmlOp::minify(string text)
     return minified;
 }
 
-string toBitStream(string text)
+string XmlOp::toBitStream(string text)
 {
     string result = "";
     unsigned char bitBuffer = 0;
