@@ -179,15 +179,8 @@ void Node::xmltojson(Node* node,Node* parent, string& json, int level) {
         
         else if (node->children[i]->children.size() == 0) //leaf node
         { 
-            if (i == node->children.size() - 1) {
-                json += "\"" + node->children[i]->data + "\",\n";
-            }
-            else {
-                json += "\"" + node->children[i]->data + "\"\n";
-            }
-           
             
-            
+            json += "\"" + node->children[i]->data + "\",\n";
         }
         else
         {
