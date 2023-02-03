@@ -1989,7 +1989,7 @@ private: System::Windows::Forms::Label^ label9;
 			}
 			//saves content to current file
 			void save(string text) {
-				file->saveFile(Adapter::to_unmanaged(tb_XML_viewer->Text));
+				file->saveFile(text);
 				c_Status->Text = "Save complete";
 				unsavedChanges = false;
 				file->toArray();
