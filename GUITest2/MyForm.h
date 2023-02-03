@@ -69,6 +69,7 @@ namespace GUITest2 {
 	private: System::Windows::Forms::Panel^ pn_Search;
 
 	private: System::Windows::Forms::Button^ btn_Format;
+	private: System::ComponentModel::IContainer^ components;
 		   //protected:
 		   //protected:
 
@@ -76,7 +77,7 @@ namespace GUITest2 {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container^ components;
+
 		bool mov;
 		int movx;
 		int movy;
@@ -150,6 +151,7 @@ private: System::Windows::Forms::Label^ lbl_active;
 
 	private: static File* file;
 		   vector <string>* elements;
+		   Node* trial;
 private: System::Windows::Forms::FlowLayoutPanel^ flowLayoutPanel6;
 private: System::Windows::Forms::Label^ label4;
 private: System::Windows::Forms::Label^ label6;
@@ -173,6 +175,7 @@ private: System::Windows::Forms::Button^ btn_mutual;
 private: System::Windows::Forms::Label^ lbl_mutual_user;
 private: System::Windows::Forms::Label^ lbl_mutual;
 private: System::Windows::Forms::Label^ label9;
+
 
 
 
@@ -1657,16 +1660,11 @@ private: System::Windows::Forms::Label^ label9;
 			{
 				c_Status->Text = "File found";
 				System::String^ managed = openFileDialog1->FileName;
-				if (managed->Substring(managed->IndexOf(".")) == ".txt") {
-					myStream->Close();
-					setFile(managed);
-					ViewFileXml();
-					pn_Formatting->BringToFront();
-					activateBTN(4);
-				}
-				else {
-					c_Status->Text = "File is not txt";
-				}
+				myStream->Close();
+				setFile(managed);
+				ViewFileXml();
+				pn_Formatting->BringToFront();
+				activateBTN(4);
 			}
 
 		}
@@ -1949,6 +1947,9 @@ private: System::Windows::Forms::Label^ label9;
 					btn_Insights->Enabled = true;
 					btn_searchTab->Enabled = true;
 
+					trial = new Node(file->getElements()[0]);
+					trial->buildTree(file->getElements());
+
 					users = new Graph(file->getElements());
 					User* user = users->getInfluential();
 					lbl_influential->Text = Adapter::to_managed(user->name) + " (" + Adapter::to_managed(to_string(user->id)) + ")";
@@ -1971,18 +1972,17 @@ private: System::Windows::Forms::Label^ label9;
 				else {
 				  vector <string> elements = file->getElements() ;
 					if(elements.size() !=0 && elements[0] == "<users>") {
-						Node* trial = new Node(elements[0]);
-						trial->buildTree(elements);
+						//Node* trial = new Node(elements[0]);
+						//trial->buildTree(elements);
 						vector<string> posts = trial->search(trial, Adapter::to_unmanaged(textBox1->Text));
 						tb_search->Text = "";
 						if (posts.size() == 0)
 							tb_search->Text = "No results found";
 						else {
-						   for (int i = 0; i < posts.size(); i++) {
-							   tb_search->Text += "post[" + i.ToString() + "]: " + Adapter::to_managed(posts[i]) + "\r\n";
-						   }
+							for (int i = 0; i < posts.size(); i++) {
+								tb_search->Text += "post[" + i.ToString() + "]: " + Adapter::to_managed(posts[i]) + "\r\n";
+							}
 						}
-						delete trial;
 					}
 				}
 
