@@ -1,70 +1,98 @@
 
-
 #include "Huffman.h"
 
 #define INTERNAL_NODE_SYMBOL '$'
 
-void Huffman::createFreqArr(string text)
-{
-    for (int i = 0; i < text.size(); i++)
+void Huffman::createFreqArr(string text){
+   for(int i=0;i<text.size();i++)
         freqArr[text[i]]++;
 }
-int *Huffman::getFreqArray()
-{
+int* Huffman::getFreqArray(){
     return freqArr;
 }
-vector<pair<char, int>> Huffman::freqToPairs(int arr[])
-{
-    vector<pair<char, int>> result;
-    for (int i = 0; i < 128; i++)
-    {
-        int j = 0;
-        if (arr[i] != 0)
-        {
+vector< pair<char, int>> Huffman::freqToPairs(int arr[]){
+    vector< pair<char, int>> result;
+    for(int i = 0; i< 128; i++){
+        int j =0;
+        if(arr[i] != 0){
             result.emplace_back(char(i), arr[i]);
-            j++;
+        j++;
         }
     }
     return result;
 }
 void Huffman::printFreqArr()
 {
-    for (int i = 0; i < 255; i++)
-        cout << freqArr[i];
+    for(int i=0;i<255;i++)
+        cout<<freqArr[i];
 }
-void Huffman::printHuff(struct MinHeapNode *root, string codeword)
+void Huffman::printHuff(struct MinHeapNode* root, string codeword)
 {
-    if (root == NULL)
+    if(root ==NULL)
         return;
 
-    // since our text don't contain the symbol "#" it can be used to refer to internal nodes
-    if (root->data != '$')
-    {
-        cout << root->data << ": " << codeword << endl;
+    //since our text don't contain the symbol "#" it can be used to refer to internal nodes
+    if(root->data!='$'){
+        cout<<root->data<<": "<<codeword<<endl;
     }
-    printHuff(root->left, codeword + "0");
-    printHuff(root->right, codeword + "1");
+    printHuff(root->left,codeword+"0");
+    printHuff(root->right,codeword+"1");
 }
 
+void Huffman::HuffToHash(struct MinHeapNode *root, std::string codeword, HashMap* hash) {
+    if(root ==NULL)
+        return ;
+
+    //since our text don't contain the symbol "#" it can be used to refer to internal nodes
+    if(root->data!='$'){
+        hash->insert(root->data, codeword);
+    }
+    HuffToHash(root->left,codeword+"0", hash);
+    HuffToHash(root->right,codeword+"1", hash);
+}
 string Huffman::HuffmanDecodes(vector<pair<char, int>> freqVec, string msg)
 {
-    struct MinHeapNode *left, *right, *top;
+    struct MinHeapNode *left,*right,*top;
 
-    // create minimum heap so needs 3 parameters the last to arrange according to frequency
-    // priority_queue< MinHeapNode*, vector<MinHeapNode*>, compareNodeFreq> heap;
+    //create minimum heap so needs 3 parameters the last to arrange according to frequency
     int size = freqVec.size();
-
-    // filling the heap
-    for (int i = 0; i < size; i++)
+    //filling the heap
+    for(int i=0;i<size;i++)
     {
-        heap.push(new MinHeapNode(freqVec[i].first, freqVec[i].second));
+        heap.push(new MinHeapNode(freqVec[i].first,freqVec[i].second));
     }
-    while (heap.size() > 1)
-    {
-        left = heap.top();
+    while(heap.size()>1){
+        left =heap.top();
         heap.pop();
 
-        right = heap.top();
+        right=heap.top();
+        heap.pop();
+
+        MinHeapNode *temp = new MinHeapNode('$', left->freq + right->freq);
+        temp->left = left;
+        temp->right = right;
+        heap.push(temp);
+    }
+    top = heap.top();
+    string result=decode(top,msg);
+    return result;
+}
+void Huffman::HuffmanCodes(vector<pair<char,int>> freqVec, HashMap* hash)
+{
+    struct MinHeapNode *left,*right,*top;
+    //create minimum heap so needs 3 parameters the last to arrange according to frequency
+    int size = freqVec.size();
+
+    //filling the heap
+    for(int i=0;i<size;i++)
+    {
+        heap.push(new MinHeapNode(freqVec[i].first,freqVec[i].second));
+    }
+    while(heap.size()>1){
+        left =heap.top();
+        heap.pop();
+
+        right=heap.top();
         heap.pop();
 
         MinHeapNode *temp = new MinHeapNode('$', left->freq + right->freq);
@@ -73,9 +101,10 @@ string Huffman::HuffmanDecodes(vector<pair<char, int>> freqVec, string msg)
 
         heap.push(temp);
     }
-    top = heap.top();
-    string result = decode(top, msg);
-    return result;
+
+    printHuff(heap.top()," ");
+    HuffToHash(heap.top(),"", hash);
+
 }
 
 string Huffman::decode(struct MinHeapNode *root, string msg)
@@ -101,3 +130,4 @@ string Huffman::decode(struct MinHeapNode *root, string msg)
     }
     return xml + '\0';
 }
+

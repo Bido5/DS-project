@@ -1,54 +1,25 @@
 #include "HashMap.h"
-//
-// Created by Abdullah Ibrahim on 05/12/2022.
-//
 
 int HashMap::counter = 0;
-int HashMap::hashString(string value)
+int HashMap::hashString(char key)
 { // calculate key value for the list which is the compressed value
-    int sum = 0;
-    for (int i = 0; i < (int)value.size(); ++i)
-    {
-        sum = sum * 60 + value[i] - 'A';
-    }
-    return abs(sum + 286); // 286 bcz first 255 are ascii and reserving 30 places for tag names.
+    return int(key); //
 }
 
-void HashMap::insert(string value)
+void HashMap::insert(char key, string value)
 {
-    key = hashString(value);
-    if (table[key].empty())
+   idx = hashString(key);
+    if (table[idx].empty())
     {
-        table[key] = value; // check is the content of array[i] is empty to insert a value
+        table[idx] = value; // check is the content of array[i] is empty to insert a value
         counter++;
     }
 }
 
-void HashMap::insertTag(string tag)
+string HashMap::searchByKey(char key)
 {
-    key = 256;
-    for (int i = 0; i < 30; i++)
-    {
-        if (table[key] == tag)
-        {
-            cout << "tag exists" << endl;
-            break;
-        }
-        else if (table[key].empty())
-        {
-            table[key] = tag;
-            cout << "new tag inserted" << endl;
-            break;
-        }
-        else
-            key++;
-        cout << "place not empty" << endl;
-    }
-}
-
-string HashMap::searchByKey(int key)
-{                      // used for decompression
-    return table[key]; // returns the array content of this key
+    idx = hashString(key);
+    return table[idx]; // returns the array content of this key
 }
 
 void HashMap::printHash()
