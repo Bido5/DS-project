@@ -79,13 +79,6 @@ queue <string> XmlOp::to_queue(string xml) {
 string XmlOp::minify(vector<string> text)
 {
     string minified = "";
-    /*
-    test.erase(remove(test.begin(), test.end(), '  '), test.end());
-    test.erase(remove(test.begin(), test.end(), '\t'), test.end());
-    test.erase(remove(test.begin(), test.end(), '\r\n'), test.end());
-    return test;
-    */
-
     for (int i = 0; i < text.size(); i++) {
         minified += text[i];
     }
@@ -104,8 +97,105 @@ string XmlOp::minify(string text)
     return minified;
 
 }
+///////////////////////////////////////////////////////////////
+string toBitStream(string text)
+{
+    string result = "";
+    unsigned char bitBuffer = 0;
+    int bitCounter = 0;
+
+    for (int i = 0; i < text.length(); i++)
+    {
+        bitBuffer = bitBuffer << 1 | text[i] - '0';
+        bitCounter++;
+        if (bitCounter == 7) // changed to 7bits
+        {
+            bitBuffer = bitBuffer + 40;
+            result += bitBuffer; // to avoid escape characters added 40
+            bitCounter = 0;
+            bitBuffer = 0;
+        }
+    }
+
+    bitBuffer = bitBuffer << (7 - bitCounter); // changed to 7bits /////////changed
+    if(bitCounter != 0) bitBuffer = bitBuffer + 40;
+    result += bitBuffer;
+    string left = to_string(bitCounter);
+    result += left;
 
 
+    return result;
+}
+
+string XmlOp::decToBin(int n)
+{
+    string result = "";
+    std::stack<int> binaryNum;
+    for (int i = 0; n > 0; i++)
+    {
+        binaryNum.push(n % 2);
+        n = n / 2;
+    }
+    while (binaryNum.size() < 7) // changed to 7bits
+    {
+        binaryNum.push(0);
+    }
+    while (binaryNum.size() > 0)
+    {
+        if (binaryNum.size() <= 7) // changed to 7bits
+        {
+            result += to_string(binaryNum.top());
+        }
+        binaryNum.pop();
+    }
+
+    return result;
+}
+
+void XmlOp::saveHeader(string &s, vector<pair<char, int>> vec)
+{
+    s = to_string(4 * vec.size());
+    s += ",";
+    for (int i = 0; i < vec.size(); i++)
+    {
+        s += vec[i].first;
+        s += ",";
+        s += to_string(vec[i].second);
+        s += ",";
+    }
+}
+
+void XmlOp::compress(string text)
+{
+    HashMap codeTable;
+    Huffman *h = new Huffman();
+    h->createFreqArr(text);
+    string result = "";
+    string fullRes = "";
+    vector<pair<char, int>> vec = h->freqToPairs(h->getFreqArray());
+
+    saveHeader(fullRes, vec);
+
+    h->HuffmanCodes(vec, &codeTable);
+    codeTable.printHash();
+
+    for (int i = 0; i < text.length(); i++)
+    {
+        result += codeTable.searchByKey(text.at(i));
+    }
+
+    result = toBitStream(result);
+
+    fullRes += result;
+    
+    ofstream myWriteFile;
+    myWriteFile.open("compressed.txt");
+    for (int i = 0; i < fullRes.size(); i++)
+    {
+        myWriteFile << fullRes[i];
+    }
+    myWriteFile.close();
+}
 /*
  * compress: iterate thro the string
  * single characters a-z insert 3ady
@@ -155,7 +245,7 @@ string XmlOp::decompress(vector<int> compressed, HashMap* hash)
     }
     return xml;
 }
-
+/////////////////////////////////////////
 vector <pair<string, int>> XmlOp::Consistency(string input) {
     stack <pair<string, int>> tags;
     vector <pair<string, int>> errors;

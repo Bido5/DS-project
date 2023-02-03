@@ -23,6 +23,10 @@ public:
 	static queue <string> to_queue(string xml);
 	static string minify(string text);
 	static string minify(vector <string> text);
+    string toBitStream(string text);
+    string decToBin(int n);
+    void saveHeader(string &s, vector<pair<char, int>> vec);
+    void compress(string text);
 	//vector<int> compress(string text, HashMaphash);
 	static string decompress(vector<int> compressed, HashMap* hash);
 	static vector <string> to_array(string xml);
