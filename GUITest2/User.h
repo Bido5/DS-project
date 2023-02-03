@@ -22,12 +22,12 @@ public:
         this->id = id;
         this->name = name;
     }
-
+  
     void addFollower(int follower)
     {
         followers.push_back(follower);
     }
-
+    //checks if a user exists in this users followers list
     bool exists(int val) {
         return binarySearch(0, followers.size()-1 , val);
     }
@@ -67,9 +67,6 @@ private:
 
         return false;
     }
-
-
-
     friend class graph;
 };
 
@@ -109,7 +106,7 @@ public:
 
         }
     }
-
+    // gets most active user
     User* getActive() {
         User* influential = nullptr;
 
@@ -126,7 +123,7 @@ public:
         return influential;
 
     }
-
+    // gets most influential user
     User* getInfluential() {
         User* active = nullptr;
         map <int, int> following;
@@ -154,5 +151,3 @@ public:
 
 
 };
-
-
