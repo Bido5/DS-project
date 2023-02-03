@@ -37,4 +37,4 @@ Search tab (Network Analysis) <br />
   ● Post search: given a specific word or topic, get the posts where this word or topic was mentioned. <br />
  <br />
 # Used tools 
-  the GUI was made using microsoft visual studio cpp/clr winforms. <br />
+  the GUI was made using microsoft visual studio cpp/clr winforms. the main method can be found in Form.cpp<br />
