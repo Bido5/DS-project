@@ -14,35 +14,39 @@
 #include "File.h"
 #include <map>
 
-
-
 using namespace std;
 
-static class XmlOp {
+static class XmlOp
+{
 public:
-	static queue <string> to_queue(string xml);
+	static queue<string> to_queue(string xml);
 	static string minify(string text);
-	static string minify(vector <string> text);
-    string toBitStream(string text);
-    string decToBin(int n);
-    void saveHeader(string &s, vector<pair<char, int>> vec);
-    void compress(string text);
-	//vector<int> compress(string text, HashMaphash);
-	static string decompress(vector<int> compressed, HashMap* hash);
-	static vector <string> to_array(string xml);
-	static vector <pair<string, int>> Consistency(string input);
-	static string printErrors(string input);
-	static string correct(vector <pair<string, int>> errors, string s);
+	static string minify(vector<string> text);
 
+	string toBitStream(string text);
+	string decToBin(int n);
+	void removeExtraBits(string &s, int extra);
+	string toByteStream(string text);
+
+	void saveHeader(string &s, vector<pair<char, int>> vec);
+	vector<pair<char, int>> readHeader(string &s);
+
+	void compress(string text);
+	void decompress(string &compressedStr);
+
+	static vector<string> to_array(string xml);
+	static vector<pair<string, int>> Consistency(string input);
+	static string printErrors(string input);
+	static string correct(vector<pair<string, int>> errors, string s);
 
 	// function to add indentations to xml
 	static string format_xml(string file);
+
 private:
-	//Function to insert a string n times its used to insert tabs
+	// Function to insert a string n times its used to insert tabs
 	static string XmlOp::insert_tabs(char s, int n);
-	static stack < pair < string, int>> tagExists(stack <pair<string, int>>& tags, string cmp, int line);
+	static stack<pair<string, int>> tagExists(stack<pair<string, int>> &tags, string cmp, int line);
 
-
-	//vector <string> Consistency(string input_stream);
+	// vector <string> Consistency(string input_stream);
 };
 #endif // DS_PROJECT_OPERATIONS_H

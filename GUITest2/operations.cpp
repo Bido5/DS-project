@@ -1,16 +1,18 @@
 #include "operations.h"
 #include "Adapter.h"
 
+vector<string> XmlOp::to_array(string xml)
+{
+    vector<string> out;
 
-
-vector <string> XmlOp::to_array(string xml) {
-    vector <string> out;
-
-    for (int i = 0; i < xml.size(); i++) {
+    for (int i = 0; i < xml.size(); i++)
+    {
         string element;
-        switch (xml[i]) {
+        switch (xml[i])
+        {
         case '<':
-            while (i < xml.size()) {
+            while (i < xml.size())
+            {
                 element.push_back(xml[i]);
                 if (xml[i] == '>')
                     break;
@@ -25,8 +27,10 @@ vector <string> XmlOp::to_array(string xml) {
             continue;
             break;
         default:
-            while (i < xml.size() && xml[i] < 127 && xml[i]>31) {
-                if (xml[i] == '<') {
+            while (i < xml.size() && xml[i] < 127 && xml[i] > 31)
+            {
+                if (xml[i] == '<')
+                {
                     i--;
                     break;
                 }
@@ -39,14 +43,18 @@ vector <string> XmlOp::to_array(string xml) {
     return out;
 }
 
-queue <string> XmlOp::to_queue(string xml) {
-    queue <string> out;
+queue<string> XmlOp::to_queue(string xml)
+{
+    queue<string> out;
 
-    for (int i = 0; i < xml.size(); i++) {
+    for (int i = 0; i < xml.size(); i++)
+    {
         string element = "";
-        switch (xml[i]) {
+        switch (xml[i])
+        {
         case '<':
-            while (i < xml.size()) {
+            while (i < xml.size())
+            {
                 element += xml[i];
                 if (xml[i] == '>')
                     break;
@@ -61,8 +69,10 @@ queue <string> XmlOp::to_queue(string xml) {
             continue;
             break;
         default:
-            while (i < xml.size() && xml[i] < 127 && xml[i]>31) {
-                if (xml[i] == '<') {
+            while (i < xml.size() && xml[i] < 127 && xml[i] > 31)
+            {
+                if (xml[i] == '<')
+                {
                     i--;
                     break;
                 }
@@ -75,15 +85,14 @@ queue <string> XmlOp::to_queue(string xml) {
     return out;
 }
 
-
 string XmlOp::minify(vector<string> text)
 {
     string minified = "";
-    for (int i = 0; i < text.size(); i++) {
+    for (int i = 0; i < text.size(); i++)
+    {
         minified += text[i];
     }
     return minified;
-
 }
 
 string XmlOp::minify(string text)
@@ -91,13 +100,13 @@ string XmlOp::minify(string text)
     string minified = "";
     vector<string> elemnets = to_array(text);
 
-    for (int i = 0; i < text.size(); i++) {
+    for (int i = 0; i < text.size(); i++)
+    {
         minified += text[i];
     }
     return minified;
-
 }
-///////////////////////////////////////////////////////////////
+
 string toBitStream(string text)
 {
     string result = "";
@@ -118,11 +127,11 @@ string toBitStream(string text)
     }
 
     bitBuffer = bitBuffer << (7 - bitCounter); // changed to 7bits /////////changed
-    if(bitCounter != 0) bitBuffer = bitBuffer + 40;
+    if (bitCounter != 0)
+        bitBuffer = bitBuffer + 40;
     result += bitBuffer;
     string left = to_string(bitCounter);
     result += left;
-
 
     return result;
 }
@@ -152,6 +161,49 @@ string XmlOp::decToBin(int n)
     return result;
 }
 
+void XmlOp::removeExtraBits(string &s, int extra)
+{
+    int last = s.length() - (6 - extra); //(7 - extra); // changed to 7bits
+    s = s.substr(0, last - 1);
+}
+
+string XmlOp::toByteStream(string text)
+{
+    string temp = "";
+    string result = "";
+    char addedBits; // this is the last bit count to retrieve the last character
+    int addedBitsNumber;
+    int itr = text.length() - 1;
+    while (text[itr] > '7' || text[itr] < '0')
+    {
+        itr--;
+    }
+
+    addedBits = text[itr];
+    addedBitsNumber = addedBits - '0';
+    for (int i = 0; i < itr; i++)
+    {
+
+        if (i == text.length() - 2)
+        {
+            if (text[i + 1] != 0)
+            {
+                char ubyte = text[i];
+                result += decToBin(int(ubyte) - 40); // 40 was added to avoid escape characters
+                break;
+            }
+        }
+        else
+        {
+            unsigned char ubyte = text[i];
+            int val = (int(ubyte) - 40);
+            result += decToBin(val); // 40 was added to avoid escape characters
+        }
+    }
+    removeExtraBits(result, addedBitsNumber);
+    return result;
+}
+
 void XmlOp::saveHeader(string &s, vector<pair<char, int>> vec)
 {
     s = to_string(4 * vec.size());
@@ -163,6 +215,71 @@ void XmlOp::saveHeader(string &s, vector<pair<char, int>> vec)
         s += to_string(vec[i].second);
         s += ",";
     }
+}
+
+vector<pair<char, int>> XmlOp::readHeader(string &s)
+{
+    vector<pair<char, int>> freqPairArr;
+    string head = "";
+    string freqStr = "";
+    char tempStr;
+    int tempFreq = 0;
+    int i = 0;
+    int j = 0;
+    int freqArrIndex = 0;
+    while (s[i] != ',')
+    {
+        head += s[i];
+        i++;
+    }
+    int headNum = stoi(head);
+    s = s.substr((i + 1), s.length());
+    i = 0; // counter to loop over the text while j is to get the number of blocks
+    // for string: a,123,  where 123 is the frequency of a
+    //       a , 123 ,
+    // j:    1 2  3  4
+    // i:    1 2 345 6
+    bool startOfFreq = false; // set when passing through frequency value to concatenate
+    while (j < headNum)
+    {
+
+        if (j % 4 == 0)
+        {
+            tempStr = s[i];
+            j++;
+            i++;
+            if (s[i] != ',')
+                i++;
+        }
+        if (j % 4 == 1) // indicates separator
+        {
+            j++;
+            i++;
+            startOfFreq = true;
+        }
+        if (startOfFreq == true)
+        {
+            if (s[i] != ',')
+                freqStr += s[i];
+            else // reached separator
+            {
+                tempFreq = stoi(freqStr);
+                freqPairArr.emplace_back(tempStr, tempFreq);
+                freqStr = "";
+                startOfFreq = false;
+                j++;
+            }
+        }
+        if (j % 4 == 3) // separator
+        {
+            j++;
+            freqArrIndex++;
+        }
+        i++;
+    }
+    s = s.substr(i, s.length());
+
+    return freqPairArr;
 }
 
 void XmlOp::compress(string text)
@@ -187,7 +304,7 @@ void XmlOp::compress(string text)
     result = toBitStream(result);
 
     fullRes += result;
-    
+
     ofstream myWriteFile;
     myWriteFile.open("compressed.txt");
     for (int i = 0; i < fullRes.size(); i++)
@@ -196,64 +313,36 @@ void XmlOp::compress(string text)
     }
     myWriteFile.close();
 }
-/*
- * compress: iterate thro the string
- * single characters a-z insert 3ady
- * check the next charactter and insert this combination
- * as the itr moves, check if the character is the comb.. check if the next achar (comb) is also in the table. 2 char exist, output to compressed file... insert a 3rd char aw nfks
- *
- *
- * */
-/*
-vector<int> compress(string text, HashMaphash)
+
+void XmlOp::decompress(string &compressedStr)
 {
-    vector<int> result = {};
-    text = minify(text);
-    for (int i = 0; i < text.length() - 1; i += 2)
+
+    vector<pair<char, int>> freqPairArr = readHeader(compressedStr);
+    Huffman *h = new Huffman();
+    compressedStr = toByteStream(compressedStr);
+
+    string result = h->HuffmanDecodes(freqPairArr, compressedStr);
+    ofstream myWriteFile;
+    myWriteFile.open("decompressed.txt");
+    for (int i = 0; i < result.size(); i++)
     {
-        string str = "";
-        str += text[i];
-        str += text[i + 1];
-        hash->insert(str);
-        result.push_back(hash->hashString(str));
+        myWriteFile << result[i];
     }
-    hash->printHash();
-    for (int i = 0; i < result.size(); ++i)
+    myWriteFile.close();
+}
+
+vector<pair<string, int>> XmlOp::Consistency(string input)
+{
+    stack<pair<string, int>> tags;
+    vector<pair<string, int>> errors;
+    vector<string> elements = XmlOp::to_array(input);
+
+    for (int i = 0; i < elements.size(); i++)
     {
-        if (result[i] != 0)
+        if (elements[i][0] == '<')
         {
-            cout << i << ": " << result[i] << " " << endl;
-        }
-    }
-
-    cout << "compression size: " << result.size() << endl;
-    return result;
-}
-*/
-// hash->printHash();
-// for (int i = 0; i < result.size(); ++i) {
-//   if(result[i] != 0){
-//     cout<< i << ": "<<result[i]<< " " << endl;
-// }
-// }
-string XmlOp::decompress(vector<int> compressed, HashMap* hash)
-{
-    string xml = "";
-    for (int i = 0; i < compressed.size(); i++)
-    {
-        xml += hash->searchByKey(compressed[i]);
-    }
-    return xml;
-}
-/////////////////////////////////////////
-vector <pair<string, int>> XmlOp::Consistency(string input) {
-    stack <pair<string, int>> tags;
-    vector <pair<string, int>> errors;
-    vector <string> elements = XmlOp::to_array(input);
-
-    for (int i = 0; i <elements.size(); i++) {
-        if (elements[i][0] == '<') {
-            if (elements[i][1] == '/') {
+            if (elements[i][1] == '/')
+            {
                 /*
                 auto top = tags.top();
                 string tagName = top.first.substr(1, top.first.size() - 2);
@@ -262,8 +351,9 @@ vector <pair<string, int>> XmlOp::Consistency(string input) {
                 else
                     tags.pop();
                 */
-                stack <pair<string, int>> fErrors = tagExists(tags, elements[i].substr(2, elements[i].size() - 3), i + 1);
-                while (!fErrors.empty()) {
+                stack<pair<string, int>> fErrors = tagExists(tags, elements[i].substr(2, elements[i].size() - 3), i + 1);
+                while (!fErrors.empty())
+                {
                     errors.push_back(fErrors.top());
                     fErrors.pop();
                 }
@@ -274,7 +364,8 @@ vector <pair<string, int>> XmlOp::Consistency(string input) {
         else
             continue;
     }
-    while (!tags.empty()) { 
+    while (!tags.empty())
+    {
         errors.push_back(tags.top());
         tags.pop();
     }
@@ -282,25 +373,31 @@ vector <pair<string, int>> XmlOp::Consistency(string input) {
     return errors;
 }
 
-stack < pair < string,int>> XmlOp::tagExists(stack <pair<string, int>>& tags, string cmp,int line) {
+stack<pair<string, int>> XmlOp::tagExists(stack<pair<string, int>> &tags, string cmp, int line)
+{
     bool found = false;
-    stack <pair<string, int>> errors;
-    while (!tags.empty()) {
+    stack<pair<string, int>> errors;
+    while (!tags.empty())
+    {
         auto top = tags.top();
         string tagName = top.first.substr(1, top.first.size() - 2);
-        if (tagName != cmp) {
+        if (tagName != cmp)
+        {
             errors.push(tags.top());
             tags.pop();
         }
-        else {
+        else
+        {
             found = true;
             tags.pop();
             break;
         }
     }
 
-    if (!found) {
-        while (!errors.empty()) {
+    if (!found)
+    {
+        while (!errors.empty())
+        {
             tags.push(errors.top());
             errors.pop();
         }
@@ -310,12 +407,13 @@ stack < pair < string,int>> XmlOp::tagExists(stack <pair<string, int>>& tags, st
     return errors;
 }
 
-
-string XmlOp::printErrors(string input) {
-    vector <pair<string, int>> errors = Consistency(input);
+string XmlOp::printErrors(string input)
+{
+    vector<pair<string, int>> errors = Consistency(input);
     string out = "";
 
-    for (auto it : errors) {
+    for (auto it : errors)
+    {
         if (it.first[1] == '/')
             out += "Missing opening tag for: ";
         else
@@ -347,36 +445,39 @@ string XmlOp::insert_tabs(char s, int n)
 
 string XmlOp::format_xml(string file)
 {
-    queue <string> q;
+    queue<string> q;
     string x = "";
     string s = "";
     string next;
-    long long i = 0, count;//count for the number of characters in tags and data
-    int count_tabs = 0;  //count for the number of tabs
+    long long i = 0, count; // count for the number of characters in tags and data
+    int count_tabs = 0;     // count for the number of tabs
 
     q = XmlOp::to_queue(file);
 
-
-    while (!q.empty()) {
+    while (!q.empty())
+    {
         x = q.front();
         q.pop();
-        if (x[0] == '<') {
-            //closing tags
-            if (x[1] == '/') {
+        if (x[0] == '<')
+        {
+            // closing tags
+            if (x[1] == '/')
+            {
                 count_tabs--;
                 s += insert_tabs('\t', count_tabs);
                 s += x;
                 s += "\r\n";
             }
-            //opening tag
-            else {
+            // opening tag
+            else
+            {
                 s += insert_tabs('\t', count_tabs);
                 s += x;
                 count_tabs++;
                 s += "\r\n";
             }
         }
-        //data
+        // data
         else
         {
             s += insert_tabs('\t', count_tabs);
@@ -387,32 +488,34 @@ string XmlOp::format_xml(string file)
     return s;
 }
 
-string XmlOp::correct(vector <pair<string, int>> errors, string s) {
-    //stack<string> sElements;
+string XmlOp::correct(vector<pair<string, int>> errors, string s)
+{
+    // stack<string> sElements;
     string out = "";
-    vector <string> elements = to_array(s);
-    map <int, string> errorl;
-    for (auto i : errors) 
+    vector<string> elements = to_array(s);
+    map<int, string> errorl;
+    for (auto i : errors)
         errorl[i.second] = i.first;
-    
+
     int j = 0;
 
-
-    for (int i = 0; i<elements.size(); i++) {
-        if (errorl[i + 1] == "") 
+    for (int i = 0; i < elements.size(); i++)
+    {
+        if (errorl[i + 1] == "")
             out += elements[i];
-        else {
-            if (errorl[i + 1][1] == '/') {
+        else
+        {
+            if (errorl[i + 1][1] == '/')
+            {
                 out += "<" + elements[i].substr(2, elements.size() - 2);
                 out += elements[i];
             }
-            else {
+            else
+            {
                 out += elements[i];
                 out += "</" + elements[i].substr(1, elements[i].size() - 1);
             }
         }
-            
     }
     return out;
-
 }
