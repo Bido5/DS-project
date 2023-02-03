@@ -17,8 +17,8 @@ Compression tab <br />
   ● Converting XML to JSON: JSON (Javascript Object Notation) is another format that is used to represent data. <br />
   ● Minify: Since spaces and newlines (\n) are actually characters that can increase the size of an XML document. This feature aims at decreasing the size of an XML  <br />
     file (compressing it) by deleting the whitespaces and indentations. <br />
-  ● Compression:  Using Huffman compression to compress the text <br />
-  ● Decompressing: the compressed data to return to its original format. <br />
+  ● Compression:  Using Huffman compression to compress the text into a file named compression<br />
+  ● Decompressing: decompresses data to return to its original format.(can only decompress a file named compression placed in the same folder as the exe) <br />
    <br />
 Insights tab (Network Analysis) <br />
   this tab and search only works if the input file contained these requirements(for more information see the attached sample): <br />
