@@ -33,3 +33,4 @@ Class GUITest2.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   Methods:
     setFile(String): PrivateScope, Public, HideBySig
     search(): PrivateScope, Public, HideBySig
+    save(basic_string<char\,std::char_traits<char>\,std::allocator<char> >*): PrivateScope, Public, HideBySig
