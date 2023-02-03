@@ -36,7 +36,8 @@ public:
     void Traverse(Node* root);
     void searchForTopic(Node* root, string topic, vector<string>& postsList);
     vector<string> getPosts();
-
+    void xmltojson(Node* node,Node* parent, string& json, int level);
+    string createJSON(Node* node);
     void xmltojson(Node* node);
     void viewJson();
     vector<string> getChildren(Node* node);
