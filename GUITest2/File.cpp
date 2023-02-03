@@ -23,7 +23,8 @@ void File::toArray() {
     xfile.open(fileName);
     while (!xfile.eof()) {
         getline(xfile, line);
-
+        if (line == "")
+            continue;
         for (int i = 0; i < line.size(); i++) {
             string s;
             switch (line[i]) {
