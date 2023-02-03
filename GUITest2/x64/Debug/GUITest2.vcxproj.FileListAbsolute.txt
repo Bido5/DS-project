@@ -1,5 +1,0 @@
-D:\college\Elec_03\Term1\DataStructures\project\GUI\GUITest2\GUITest2\x64\Debug\GUITest2.vcxproj.AssemblyReference.cache
-D:\college\Elec_03\Term1\DataStructures\project\GUI\GUITest2\GUITest2\x64\Debug\GUITest2.vcxproj.SuggestedBindingRedirects.cache
-D:\college\Elec_03\Term1\DataStructures\project\GUI\GUITest2\GUITest2\x64\Debug\GUITest2.MyForm.resources
-D:\college\Elec_03\Term1\DataStructures\project\GUI\GUITest2\GUITest2\x64\Debug\GUITest2.vcxproj.GenerateResource.cache
-D:\college\Elec_03\Term1\DataStructures\project\GUI\GUITest2\GUITest2\x64\Debug\GUITest2.createFileForm.resources
